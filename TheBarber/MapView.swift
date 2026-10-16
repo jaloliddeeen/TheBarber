@@ -32,34 +32,19 @@ struct MapView: View {
                         CustomMapAnnotation(icon: "scissors", distance: "0.2 km")
                     }
                 }
-                
-                HStack(spacing: 12) {
-                    HStack{
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.primary)
-                        TextField("Search barbers", text: $searchText)
-                    }
-                    .padding(12)
-                    .background(Color(.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-                    
-                    Button(action: {
-                        
-                    }) {
-                        Image(systemName: "slider.horizontal.3")
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.primary)
-                            .padding(12)
-                            .background(Color(.systemBackground))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+                .navigationTitle("Barbers")
+                .navigationBarTitleDisplayMode(.inline)
+                .searchable(text: $searchText, prompt: "Search barbers")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            //action
+                        }) {
+                            Image(systemName: "slider.horizontal.3")
+                        }
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top, 8)
             }
-            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

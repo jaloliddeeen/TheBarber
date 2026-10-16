@@ -49,7 +49,7 @@ struct BookingsView: View {
                                     }
                                 }
                             } else {
-                                Text("No active bookings")
+                                Text("No inactive bookings")
                                     .foregroundColor(.secondary)
                                     .padding()
                             }

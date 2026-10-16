@@ -65,18 +65,14 @@ struct BarberCardView: View {
                 .bold()
                 .foregroundColor(.blue)
             
-            Button(action: {
-                
-            }) {
-                Text("Book now")
-                    .font(.subheadline)
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
-                    .background(Color.blue.opacity(0.12))
-                    .foregroundColor(.blue)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            }
+            Text("Book now")
+                .font(.subheadline)
+                .bold()
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 8)
+                .background(Color.blue.opacity(0.12))
+                .foregroundColor(.blue)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
         .padding(10)
         .background(Color(.secondarySystemGroupedBackground))

@@ -15,6 +15,7 @@ enum AppRoute: Hashable {
 
 struct HomeView: View {
     @State private var showingFilterSheet = false
+    @State private var showingNotificationsSheet = false
     @Binding var selectedTab: Int
     @Binding var navPath: NavigationPath
     
@@ -65,7 +66,9 @@ struct HomeView: View {
                 }
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { }) {
+                Button(action: {
+                    showingNotificationsSheet = true
+                }) {
                     Image(systemName: "bell")
                         .font(.title3)
                 }
@@ -74,6 +77,10 @@ struct HomeView: View {
         .sheet(isPresented: $showingFilterSheet) {
             FilterView()
         }
+        .sheet(isPresented: $showingNotificationsSheet) {
+            NotificationsView()
+        }
+        
         .navigationDestination(for: AppRoute.self) { route in
             switch route {
             case .detail(let barber):
