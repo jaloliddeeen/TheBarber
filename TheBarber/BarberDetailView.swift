@@ -10,6 +10,7 @@ import SwiftUI
 struct BarberDetailView: View {
     let barber: Barber
     
+    @State private var isSaved = false
     @State private var selectedDate: Date = Date()
     @State private var selectedTime: String = "12:00"
     
@@ -163,6 +164,28 @@ struct BarberDetailView: View {
         }
         .navigationTitle(barber.name)
         .navigationBarTitleDisplayMode(.inline)
+        
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                ShareLink(
+                    item: "\(barber.name), located at \(barber.location). Book on TheBarber!",
+                    subject: Text(barber.name),
+                    message: Text("Check out \(barber.name) on TheBarber")
+                ) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                
+                Button(action: {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                        isSaved.toggle()
+                    }
+                }) {
+                    Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
+                        .foregroundColor(isSaved ? .blue : .primary)
+                        .contentTransition(.symbolEffect(.replace))
+                }
+            }
+        }
     }
 }
 

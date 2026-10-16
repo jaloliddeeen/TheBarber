@@ -78,6 +78,7 @@
 				48FEDF94302BCBE30017569D /* MainTabView.swift */,
 				48FEDF96302BDDD40017569D /* HomeView.swift */,
 				4863B6F53082764400CC2ECB /* NotificationsView.swift */,
+				48FEDF9C302CE0660017569D /* FilterView.swift */,
 				48FEDF9A302BDF0D0017569D /* BarberCardView.swift */,
 				48FEDF9E302D1D990017569D /* BarberDetailView.swift */,
 				48FEDFA0302DC1C10017569D /* BookingReviewView.swift */,
@@ -85,7 +86,6 @@
 				48D5F62530311CF00018502A /* BookingsView.swift */,
 				48D5F6293031ADA10018502A /* MapView.swift */,
 				48D5F62B3031B9880018502A /* ProfileView.swift */,
-				48FEDF9C302CE0660017569D /* FilterView.swift */,
 				48FEDF8A302BC21C0017569D /* Assets.xcassets */,
 				48FEDF8C302BC21C0017569D /* Preview Content */,
 			);
