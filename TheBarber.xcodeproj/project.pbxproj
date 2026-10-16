@@ -7,18 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
+		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
+		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
 		48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF86302BC21A0017569D /* TheBarberApp.swift */; };
-		48FEDF89302BC21A0017569D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF88302BC21A0017569D /* ContentView.swift */; };
+		48FEDF89302BC21A0017569D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF88302BC21A0017569D /* RegisterView.swift */; };
 		48FEDF8B302BC21C0017569D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FEDF8A302BC21C0017569D /* Assets.xcassets */; };
 		48FEDF8E302BC21C0017569D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FEDF8D302BC21C0017569D /* Preview Assets.xcassets */; };
+		48FEDF95302BCBE30017569D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF94302BCBE30017569D /* MainTabView.swift */; };
+		48FEDF97302BDDD40017569D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF96302BDDD40017569D /* HomeView.swift */; };
+		48FEDF9B302BDF0D0017569D /* BarberCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF9A302BDF0D0017569D /* BarberCardView.swift */; };
+		48FEDF9D302CE0660017569D /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF9C302CE0660017569D /* FilterView.swift */; };
+		48FEDF9F302D1D9A0017569D /* BarberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDF9E302D1D990017569D /* BarberDetailView.swift */; };
+		48FEDFA1302DC1C10017569D /* BookingReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDFA0302DC1C10017569D /* BookingReviewView.swift */; };
+		48FEDFA3302E68650017569D /* BookingSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEDFA2302E68650017569D /* BookingSuccessView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
+		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		48FEDF83302BC21A0017569D /* TheBarber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheBarber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48FEDF86302BC21A0017569D /* TheBarberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBarberApp.swift; sourceTree = "<group>"; };
-		48FEDF88302BC21A0017569D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		48FEDF88302BC21A0017569D /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		48FEDF8A302BC21C0017569D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FEDF8D302BC21C0017569D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		48FEDF94302BCBE30017569D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		48FEDF96302BDDD40017569D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		48FEDF9A302BDF0D0017569D /* BarberCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberCardView.swift; sourceTree = "<group>"; };
+		48FEDF9C302CE0660017569D /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		48FEDF9E302D1D990017569D /* BarberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberDetailView.swift; sourceTree = "<group>"; };
+		48FEDFA0302DC1C10017569D /* BookingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingReviewView.swift; sourceTree = "<group>"; };
+		48FEDFA2302E68650017569D /* BookingSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSuccessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +72,17 @@
 			isa = PBXGroup;
 			children = (
 				48FEDF86302BC21A0017569D /* TheBarberApp.swift */,
-				48FEDF88302BC21A0017569D /* ContentView.swift */,
+				48FEDF88302BC21A0017569D /* RegisterView.swift */,
+				48FEDF94302BCBE30017569D /* MainTabView.swift */,
+				48FEDF96302BDDD40017569D /* HomeView.swift */,
+				48FEDF9E302D1D990017569D /* BarberDetailView.swift */,
+				48FEDFA0302DC1C10017569D /* BookingReviewView.swift */,
+				48FEDFA2302E68650017569D /* BookingSuccessView.swift */,
+				48D5F62530311CF00018502A /* BookingsView.swift */,
+				48D5F6293031ADA10018502A /* MapView.swift */,
+				48D5F62B3031B9880018502A /* ProfileView.swift */,
+				48FEDF9C302CE0660017569D /* FilterView.swift */,
+				48FEDF9A302BDF0D0017569D /* BarberCardView.swift */,
 				48FEDF8A302BC21C0017569D /* Assets.xcassets */,
 				48FEDF8C302BC21C0017569D /* Preview Content */,
 			);
@@ -137,8 +167,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48FEDF89302BC21A0017569D /* ContentView.swift in Sources */,
+				48FEDFA3302E68650017569D /* BookingSuccessView.swift in Sources */,
+				48D5F62630311CF00018502A /* BookingsView.swift in Sources */,
+				48FEDF9F302D1D9A0017569D /* BarberDetailView.swift in Sources */,
+				48D5F62A3031ADA10018502A /* MapView.swift in Sources */,
+				48D5F62C3031B9880018502A /* ProfileView.swift in Sources */,
+				48FEDF89302BC21A0017569D /* RegisterView.swift in Sources */,
+				48FEDF97302BDDD40017569D /* HomeView.swift in Sources */,
 				48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */,
+				48FEDF9B302BDF0D0017569D /* BarberCardView.swift in Sources */,
+				48FEDF9D302CE0660017569D /* FilterView.swift in Sources */,
+				48FEDF95302BCBE30017569D /* MainTabView.swift in Sources */,
+				48FEDFA1302DC1C10017569D /* BookingReviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

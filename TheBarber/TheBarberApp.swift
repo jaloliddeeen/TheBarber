@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct TheBarberApp: App {
+    @AppStorage("hasCompletedRegistration") private var hasCompletedRegistration: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if hasCompletedRegistration {
+                MainTabView()
+            } else {
+                RegisterView()
+            }
         }
     }
 }

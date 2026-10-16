@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct BookReviewView: View {
+struct BookingReviewView: View {
     let barber: Barber
     let selectedDate: Date
     let selectedTime: String
     
-    @State private var navigateToSuccess = false
+    @Binding var selectedTab: Int
+    @Binding var navPath: NavigationPath
     
     private var formattedDate: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "d-MMMM"
+        formatter.dateFormat = "MMMM d"
         return formatter.string(from: selectedDate)
     }
     
@@ -27,13 +28,13 @@ struct BookReviewView: View {
                     LabeledContent("Barber / Shop Name", value: barber.name)
                     LabeledContent("Price Range", value: "$\(barber.price) - $\(barber.price + 50)")
                     LabeledContent("Payment Method", value: "Cash")
-                    LabeledContent("Phone Number", value: "+998 94 633-24-24")
+                    LabeledContent("Phone Number", value: "+48 982-422-312")
                     LabeledContent("Appointment Time", value: "\(selectedTime) | \(formattedDate)")
                 }
             }
             
             Button( action: {
-                navigateToSuccess = true
+                navPath.append(AppRoute.success)
             }) {
                 Text("Confirm booking")
                     .font(.headline)
@@ -49,12 +50,23 @@ struct BookReviewView: View {
         }
         .navigationTitle("Confirm booking")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $navigateToSuccess) {
-            BookingSuccessView()
-        }
     }
 }
 
 #Preview {
-    BookReviewView()
+    NavigationStack {
+        BookingReviewView(
+            barber: Barber(
+                name: "John Barber",
+                location: "Charlie street",
+                price: 120,
+                rating: 4.5,
+                imageName: "barber1"
+            ),
+            selectedDate: Date(),
+            selectedTime: "12:00",
+            selectedTab: .constant(0),
+            navPath: .constant(NavigationPath())
+        )
+    }
 }
