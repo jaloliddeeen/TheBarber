@@ -9,7 +9,10 @@ import SwiftUI
 
 struct Booking: Identifiable {
     let id = UUID()
-    let date: String
+    let month: String
+    let day: String
+    let time: String
+    var fullTime: String { "\(month) \(day), \(time)" }
     let shopName: String
     let price: String
     let status: String
@@ -24,40 +27,44 @@ struct BookingsView: View {
     let tabs = ["Active", "Inactive"]
     
     let activeBookings = [
-        Booking(date: "September 8, 12:00", shopName: "John Barbershop", price: "$65", status: "Confirmed", paymentMethod: "Cash", phoneNumber: "+48 726-273-188"),
-        Booking(date: "October 12, 12:00", shopName: "Suzy's style", price: "$85", status: "Confirmed", paymentMethod: "Card", phoneNumber: "+48 382-233-658")
+        Booking(month: "SEP", day: "8", time: "12:05", shopName: "John Barbershop", price: "$65", status: "Confirmed", paymentMethod: "Cash", phoneNumber: "+48 726-273-188"),
+        Booking(month: "SEP", day: "19", time: "17:00", shopName: "Suzy's style", price: "$85", status: "Confirmed", paymentMethod: "Card", phoneNumber: "+48 382-233-658")
     ]
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                VStack {
-                    Picker("Status", selection: $selectedTab) {
-                        ForEach(tabs, id: \.self) {
-                            Text($0)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding()
-                    
-                    ScrollView {
-                        VStack(spacing: 16) {
-                            if selectedTab == "Active" {
-                                ForEach(activeBookings) { booking in
-                                    BookingCardView(booking: booking) {
-                                        selectedBooking = booking
-                                    }
-                                }
-                            } else {
-                                Text("No inactive bookings")
-                                    .foregroundColor(.secondary)
-                                    .padding()
-                            }
-                        }
-                        .padding(.horizontal)
+            VStack(spacing: 0) {
+                Picker("Status", selection: $selectedTab) {
+                    ForEach(tabs, id: \.self) {
+                        Text($0)
                     }
                 }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+                
+                ScrollView {
+                    VStack(spacing: 12) {
+                        if selectedTab == "Active" {
+                            ForEach(activeBookings) { booking in
+                                BookingCardView(booking: booking) {
+                                    selectedBooking = booking
+                                }
+                            }
+                        } else {
+                            ContentUnavailableView(
+                                "No active bookings",
+                                systemImage: "calendar.badge.clock",
+                                description: Text("Past appointments will appear here")
+                            )
+                            .padding(.top, 160)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                }
             }
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("My bookings")
             .sheet(item: $selectedBooking) { booking in
                 BookingDetailSheet(booking: booking)
@@ -70,48 +77,63 @@ struct BookingsView: View {
 
 struct BookingCardView: View {
     let booking: Booking
-    let onViewDetails: () -> Void
+    let onTap: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(booking.date)
-                    .font(.headline)
-                
-                Spacer()
-                
-                Text(booking.status)
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(.green)
-            }
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Barbershop: \(booking.shopName)")
-                    .foregroundColor(.secondary)
-                Text("Total price: \(booking.price)")
-                    .foregroundColor(.secondary)
-            }
-            .font(.subheadline)
-            
-            Button(action: {
-                onViewDetails()
-            }) {
-                HStack {
-                    Text("View details")
-                    Image(systemName: "arrow.right")
+        Button(action: onTap) {
+            HStack(spacing: 14) {
+                VStack(spacing: 2) {
+                    Text(booking.month)
+                        .font(.caption2)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.red)
+                    Text(booking.day)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
                 }
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .frame(width: 52, height: 56)
+                .background(Color(.tertiarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(booking.shopName)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                        
+                        Text(booking.status)
+                            .font(.caption2)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(Color.green.opacity(0.12))
+                            .foregroundColor(.green)
+                            .clipShape(Capsule())
+                    }
+                    
+                    HStack(spacing: 6) {
+                        Text(booking.time)
+                        Text("•")
+                        Text(booking.price)
+                        Text("•")
+                        Text(booking.paymentMethod)
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                }
+                
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundColor(Color(.tertiaryLabel))
             }
+            .padding(14)
+            .background(Color(.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(.systemGray5), lineWidth: 1)
-        )
+        .buttonStyle(.plain)
     }
 }
 
@@ -158,7 +180,7 @@ struct BookingDetailSheet: View {
                 }
             }
             .padding()
-            .navigationTitle("Booking: \(booking.date)")
+            .navigationTitle("Booking: \(booking.fullTime)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
