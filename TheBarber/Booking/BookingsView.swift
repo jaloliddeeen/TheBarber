@@ -12,8 +12,9 @@ struct Booking: Identifiable {
     let month: String
     let day: String
     let time: String
+    let barber: Barber
     var fullTime: String { "\(month) \(day), \(time)" }
-    let shopName: String
+    var shopName: String { barber.name }
     let price: String
     let status: String
     let paymentMethod: String
@@ -21,15 +22,11 @@ struct Booking: Identifiable {
 }
 
 struct BookingsView: View {
+    @EnvironmentObject var bookingsManager: BookingsManager
     @State private var selectedTab = "Active"
     @State private var selectedBooking: Booking?
     
     let tabs = ["Active", "Inactive"]
-    
-    let activeBookings = [
-        Booking(month: "SEP", day: "8", time: "12:05", shopName: "John Barbershop", price: "$65", status: "Confirmed", paymentMethod: "Cash", phoneNumber: "+48 726-273-188"),
-        Booking(month: "SEP", day: "19", time: "17:00", shopName: "Suzy's style", price: "$85", status: "Confirmed", paymentMethod: "Card", phoneNumber: "+48 382-233-658")
-    ]
     
     var body: some View {
         NavigationStack {
@@ -46,9 +43,18 @@ struct BookingsView: View {
                 ScrollView {
                     VStack(spacing: 12) {
                         if selectedTab == "Active" {
-                            ForEach(activeBookings) { booking in
-                                BookingCardView(booking: booking) {
-                                    selectedBooking = booking
+                            if bookingsManager.activeBookings.isEmpty {
+                               ContentUnavailableView(
+                                   "No bookings yet",
+                                   systemImage: "calendar.badge.plus",
+                                   description: Text("Appointments will appear here")
+                               )
+                               .padding(.top, 160)
+                            } else {
+                                ForEach(bookingsManager.activeBookings) { booking in
+                                    BookingCardView(booking: booking) {
+                                        selectedBooking = booking
+                                    }
                                 }
                             }
                         } else {
@@ -67,9 +73,11 @@ struct BookingsView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("My bookings")
             .sheet(item: $selectedBooking) { booking in
-                BookingDetailSheet(booking: booking)
-                    .presentationDetents([.fraction(0.65), .large])
-                    .presentationDragIndicator(.visible)
+                BookingDetailSheet(booking: booking) {
+                    bookingsManager.cancelBooking(booking)
+                }
+                .presentationDetents([.fraction(0.65), .large])
+                .presentationDragIndicator(.visible)
             }
         }
     }
@@ -139,13 +147,24 @@ struct BookingCardView: View {
 
 struct BookingDetailSheet: View {
     let booking: Booking
+    var onCancel: () -> Void
     @Environment(\.dismiss) var dismiss
+    @State private var showCancelAlert = false
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 24) {
                 VStack(alignment: .leading, spacing: 16) {
-                    DetailRowView(title: "Barber / Shop Name", icon: "building.2", value: booking.shopName, showChevron: true)
+                    NavigationLink {
+                        BarberDetailView(
+                            barber: booking.barber,
+                            selectedTab: .constant(1),
+                            navPath: .constant(NavigationPath())
+                        )
+                    } label: {
+                        DetailRowView(title: "Barber / Shop Name", icon: "building.2", value: booking.shopName, showChevron: true)
+                    }
+                    .buttonStyle(.plain)
                     
                     Divider()
                     
@@ -166,7 +185,7 @@ struct BookingDetailSheet: View {
                 Spacer()
                 
                 Button(action: {
-                    //
+                    showCancelAlert = true
                 }) {
                     Text("Cancel booking")
                         .font(.headline)
@@ -191,6 +210,15 @@ struct BookingDetailSheet: View {
                     }
                 }
                 
+            }
+            .alert("Cancel booking?", isPresented: $showCancelAlert) {
+                Button("Cancel appointment", role: .destructive) {
+                    onCancel()
+                    dismiss()
+                }
+                Button("Keep booking", role: .cancel) { }
+            } message: {
+                Text("Are you sure you want to cancel your appointment with \(booking.shopName)?")
             }
         }
     }
@@ -228,6 +256,10 @@ struct DetailRowView: View {
     }
 }
 
+
 #Preview {
     MainTabView()
+        .environmentObject(BookingsManager())
+        .environmentObject(SavedBarbersManager())
 }
+

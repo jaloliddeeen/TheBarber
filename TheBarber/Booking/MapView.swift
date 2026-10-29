@@ -70,6 +70,7 @@ struct CustomMapAnnotation: View {
             }
             Text(distance)
                 .font(.caption)
+                .foregroundStyle(.primary)
                 .fontWeight(.bold)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)

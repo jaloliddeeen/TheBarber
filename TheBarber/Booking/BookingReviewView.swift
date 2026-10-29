@@ -15,25 +15,44 @@ struct BookingReviewView: View {
     @Binding var selectedTab: Int
     @Binding var navPath: NavigationPath
     
+    @EnvironmentObject var bookingsManager: BookingsManager
+    @State private var paymentMethod = "Apple pay"
+    let paymentMethods = ["Card", "Cash"]
+    
     private var formattedDate: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM d"
+        formatter.dateStyle = .medium
         return formatter.string(from: selectedDate)
     }
     
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("Booking summary")) {
+                Section {
                     LabeledContent("Barber / Shop Name", value: barber.name)
                     LabeledContent("Price Range", value: "$\(barber.price) - $\(barber.price + 50)")
-                    LabeledContent("Payment Method", value: "Cash")
                     LabeledContent("Phone Number", value: "+48 982-422-312")
                     LabeledContent("Appointment Time", value: "\(selectedTime) | \(formattedDate)")
                 }
+                
+                Section {
+                    Picker("Payment method", selection: $paymentMethod) {
+                        ForEach(paymentMethods, id: \.self) { method in
+                            Text(method).tag(method)
+                        }
+                    }
+                }
             }
+            .listSectionSpacing(.compact)
+            
             
             Button( action: {
+                bookingsManager.addBooking(
+                    barber: barber,
+                    date: selectedDate,
+                    time: selectedTime,
+                    paymentMethod: paymentMethod
+                )
                 navPath.append(AppRoute.success)
             }) {
                 Text("Confirm booking")

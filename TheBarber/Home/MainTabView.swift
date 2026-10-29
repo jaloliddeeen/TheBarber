@@ -11,6 +11,7 @@ struct MainTabView: View {
     @State private var selectedTab = 0
     @State private var navPath = NavigationPath()
     
+    @StateObject private var bookingsManager = BookingsManager()
     @StateObject private var savedManager = SavedBarbersManager()
     
     var body: some View {
@@ -48,6 +49,7 @@ struct MainTabView: View {
             .tag(3)
         }
         .environmentObject(savedManager)
+        .environmentObject(bookingsManager)
     }
 }
 
