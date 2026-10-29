@@ -10,7 +10,8 @@ import SwiftUI
 struct BarberDetailView: View {
     let barber: Barber
     
-    @State private var isSaved = false
+    @EnvironmentObject var savedManager: SavedBarbersManager
+    
     @State private var selectedDate: Date = Date()
     @State private var selectedTime: String = "12:00"
     
@@ -19,6 +20,10 @@ struct BarberDetailView: View {
     
     let timeSlots = ["11:15", "12:00", "12:45", "13:30", "14:15", "15:00"]
     let portfolioImages = ["portfolio2", "portfolio3", "portfolio4", "portfolio5"]
+    
+    private var isBarberSaved: Bool {
+        savedManager.isSaved(barber)
+    }
     
     var body: some View {
         ScrollView {
@@ -165,6 +170,7 @@ struct BarberDetailView: View {
         .navigationTitle(barber.name)
         .navigationBarTitleDisplayMode(.inline)
         
+        
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 ShareLink(
@@ -177,11 +183,11 @@ struct BarberDetailView: View {
                 
                 Button(action: {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                        isSaved.toggle()
+                        savedManager.toggleSave(barber)
                     }
                 }) {
-                    Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
-                        .foregroundColor(isSaved ? .blue : .primary)
+                    Image(systemName: isBarberSaved ? "bookmark.fill" : "bookmark")
+                        .foregroundColor(isBarberSaved ? .blue : .primary)
                         .contentTransition(.symbolEffect(.replace))
                 }
             }
@@ -191,14 +197,15 @@ struct BarberDetailView: View {
 
 #Preview {
     BarberDetailView(
-            barber: Barber(
-                name: "James Barber",
-                location: "Charlie street, 67th",
-                price: 120,
-                rating: 4.5,
-                imageName: "barber1"
-            ),
-            selectedTab: .constant(0),
-            navPath: .constant(NavigationPath())
+        barber: Barber(
+            name: "James Barber",
+            location: "Charlie street, 67th",
+            price: 120,
+            rating: 4.5,
+            imageName: "barber1"
+        ),
+        selectedTab: .constant(0),
+        navPath: .constant(NavigationPath())
     )
+    .environmentObject(SavedBarbersManager())
 }

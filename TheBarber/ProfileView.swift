@@ -45,7 +45,7 @@ struct ProfileView: View {
                 
                 Section {
                     NavigationLink {
-                        Text("Saved barbers")
+                        SavedBarbersView()
                     } label: {
                         Label {
                             Text("Saved barbers")
@@ -102,5 +102,6 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
+        .environmentObject(SavedBarbersManager())
 }
 

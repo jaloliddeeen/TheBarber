@@ -11,6 +11,8 @@ struct MainTabView: View {
     @State private var selectedTab = 0
     @State private var navPath = NavigationPath()
     
+    @StateObject private var savedManager = SavedBarbersManager()
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack(path: $navPath) {
@@ -46,6 +48,7 @@ struct MainTabView: View {
             }
             .tag(3)
         }
+        .environmentObject(savedManager)
     }
 }
 

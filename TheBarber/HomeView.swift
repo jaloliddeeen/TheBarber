@@ -24,10 +24,10 @@ struct HomeView: View {
         Barber(name: "The Barber's Den", location: "Warszawa Centralna", price: 70, rating: 4.8, imageName: "barber2"),
         Barber(name: "The Hair Station", location: "Suzy's Garden", price: 100, rating: 3.9, imageName: "barber3"),
         Barber(name: "The Gentleman's Club", location: "Tenerife Sea", price: 80, rating: 4.2, imageName: "barber4"),
-        Barber(name: "John Barbershop", location: "Main street Avenue", price: 120, rating: 4.5, imageName: "barber2"),
-        Barber(name: "The Barber's Den", location: "Warszawa Centralna", price: 70, rating: 4.8, imageName: "barber1"),
-        Barber(name: "The Hair Station", location: "Suzy's Garden", price: 100, rating: 3.9, imageName: "barber4"),
-        Barber(name: "The Gentleman's Club", location: "Tenerife Sea", price: 80, rating: 4.2, imageName: "barber3")
+        Barber(name: "John Barbershop", location: "Main street Avenue", price: 120, rating: 4.5, imageName: "barber6"),
+        Barber(name: "The Barber's Den", location: "Warszawa Centralna", price: 70, rating: 4.8, imageName: "barber5"),
+        Barber(name: "The Hair Station", location: "Suzy's Garden", price: 100, rating: 3.9, imageName: "barber7"),
+        Barber(name: "The Gentleman's Club", location: "Tenerife Sea", price: 80, rating: 4.2, imageName: "barber8")
     ]
     
     let gridColumns = [
