@@ -23,7 +23,6 @@ struct MainTabView: View {
             }
             .tag(0)
             
-            // Tab 1: Bookings
             NavigationStack {
                 BookingsView()
             }
