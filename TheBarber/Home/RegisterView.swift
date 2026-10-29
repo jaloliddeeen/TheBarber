@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @AppStorage("hasCompletedRegistration") private var hasCompletedRegistration: Bool = false
+    @AppStorage("userName") private var storedName: String = ""
+    @AppStorage("userPhone") private var storedPhone: String = ""
+    
     @State private var name: String = ""
     @State private var phoneNumber: String = ""
     @FocusState private var focusedField: Field?
@@ -76,7 +81,12 @@ struct RegisterView: View {
             
             VStack(spacing: 8) {
                 Button(action: {
-                    hasCompletedRegistration = true
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                        storedName = name.trimmingCharacters(in: .whitespaces)
+                        storedPhone = phoneNumber.trimmingCharacters(in: .whitespaces)
+                        hasCompletedRegistration = true
+                    }
+                    dismiss()
                 }) {
                     Text("Continue")
                         .font(.headline)
@@ -90,7 +100,10 @@ struct RegisterView: View {
                 .disabled(!isFormValid)
                 
                 Button(action: {
-                    hasCompletedRegistration = true
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                        hasCompletedRegistration = true
+                    }
+                    dismiss()
                 }) {
                     Text("Skip")
                         .font(.headline)

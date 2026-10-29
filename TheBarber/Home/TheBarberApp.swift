@@ -11,13 +11,23 @@ import SwiftUI
 struct TheBarberApp: App {
     @AppStorage("hasCompletedRegistration") private var hasCompletedRegistration: Bool = false
     
+    @StateObject private var savedManager = SavedBarbersManager()
+    @StateObject private var bookingsManager = BookingsManager()
+    
     var body: some Scene {
         WindowGroup {
-            if hasCompletedRegistration {
-                MainTabView()
-            } else {
-                RegisterView()
+            Group {
+                if hasCompletedRegistration {
+                    MainTabView()
+                        .environmentObject(savedManager)
+                        .environmentObject(bookingsManager)
+                        .transition(.opacity)
+                } else {
+                    RegisterView()
+                        .transition(.opacity)
+                }
             }
+            .animation(.easeInOut(duration: 0.35), value: hasCompletedRegistration)
         }
     }
 }
