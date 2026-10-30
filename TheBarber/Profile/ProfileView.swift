@@ -27,17 +27,38 @@ struct ProfileView: View {
                         Button(action: {
                             showRegisterSheet = true
                         }) {
-                            HStack {
-                                Text("Create account / Sign in")
-                                Image(systemName: "arrow.right")
+                            HStack(spacing: 16) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.blue.opacity(0.12))
+                                        .frame(width: 64, height: 64)
+                                    
+                                    Image(systemName: "person.crop.circle.badge.plus")
+                                        .font(.title2)
+                                        .foregroundColor(.blue)
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Sign In or Register")
+                                        .font(.title3)
+                                        .bold()
+                                        .foregroundColor(.primary)
+                                    
+                                    Text("Sync bookings realtime")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                        .lineLimit(1)
+                                }
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.footnote.weight(.semibold))
+                                    .foregroundColor(Color(.tertiaryLabel))
                             }
-                            .font(.subheadline.bold())
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 42)
-                            .background(Color.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(.vertical, 4)
                         }
+                        .buttonStyle(.plain)
                     } else {
                         HStack(spacing: 16) {
                             Group {
@@ -98,6 +119,25 @@ struct ProfileView: View {
                             Text("About the project")
                         } icon: {
                             Image(systemName: "info.circle")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                }
+                
+                Section {
+                    NavigationLink {
+                        BarberApplicationView()
+                    } label: {
+                        Label {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Join as a Barber")
+                                    .font(.body)
+                                Text("Apply to list your shop on our partner app")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        } icon: {
+                            Image(systemName: "briefcase.fill")
                                 .foregroundColor(.blue)
                         }
                     }
@@ -186,11 +226,20 @@ struct EditProfileView: View {
     @AppStorage("userPhone") private var storedPhone: String = ""
     @AppStorage("userAvatarData") private var storedAvatarData: Data = Data()
     
+    private let maxNameLength = 30
+    private let maxPhoneLength = 16
+    
     @State private var name: String = ""
     @State private var phone: String = ""
     @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var avatarImage: UIImage?
     @State private var showLogoutConfirmation = false
+    
+    private var isFormValid: Bool {
+        let trimmedName = name.trimmingCharacters(in: .whitespaces)
+        let trimmedPhone = phone.trimmingCharacters(in: .whitespaces)
+        return !trimmedName.isEmpty && trimmedPhone.count >= 9
+    }
 
     
     var body: some View {
@@ -262,18 +311,45 @@ struct EditProfileView: View {
                     .listRowBackground(Color.clear)
                 }
                 
-                Section("Personal Details") {
-                    TextField("First Name", text: $name)
-                        .textContentType(.givenName)
+                Section(
+                    header: Text("Personal Details"),
+                    footer: Text("Name is limited to \(maxNameLength) characters. Phone number accepts up to \(maxPhoneLength) digits (minimum 9).")
+                ) {
+                    HStack {
+                        TextField("Full Name", text: $name)
+                            .textContentType(.name)
+                        
+                        Text("\(name.count)/\(maxNameLength)")
+                            .font(.caption2)
+                            .foregroundColor(name.count >= maxNameLength ? .red : .secondary)
+                    }
                     
-                    TextField("Phone Number", text: $phone)
-                        .keyboardType(.phonePad)
-                        .textContentType(.telephoneNumber)
+                    HStack {
+                        TextField("Phone Number", text: $phone)
+                            .keyboardType(.phonePad)
+                            .textContentType(.telephoneNumber)
+                        
+                        Text("\(phone.count)/\(maxPhoneLength)")
+                            .font(.caption2)
+                            .foregroundColor(phone.count >= maxPhoneLength ? .red : .secondary)
+                    }
                 }
             }
             .navigationTitle("Edit profile")
             .navigationBarTitleDisplayMode(.inline)
             .listSectionSpacing(.compact)
+            
+            .onChange(of: name) { _, newValue in
+                if newValue.count > maxNameLength {
+                    name = String(newValue.prefix(maxNameLength))
+                }
+            }
+            .onChange(of: phone) { _, newValue in
+                if newValue.count > maxPhoneLength {
+                    phone = String(newValue.prefix(maxPhoneLength))
+                }
+            }
+            
             .onAppear {
                 name = storedName
                 phone = storedPhone

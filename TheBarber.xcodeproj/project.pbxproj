@@ -11,6 +11,7 @@
 		485B367D309162C100DA5E4D /* SavedBarbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B367C309162C100DA5E4D /* SavedBarbersView.swift */; };
 		485B367F3093844B00DA5E4D /* AboutProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B367E3093844B00DA5E4D /* AboutProjectView.swift */; };
 		485B368130939F4E00DA5E4D /* BookingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B368030939F4E00DA5E4D /* BookingsManager.swift */; };
+		485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B3685309483FC00DA5E4D /* BarberApplicationView.swift */; };
 		4863B6F63082764400CC2ECB /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863B6F53082764400CC2ECB /* NotificationsView.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
@@ -33,6 +34,7 @@
 		485B367C309162C100DA5E4D /* SavedBarbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBarbersView.swift; sourceTree = "<group>"; };
 		485B367E3093844B00DA5E4D /* AboutProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutProjectView.swift; sourceTree = "<group>"; };
 		485B368030939F4E00DA5E4D /* BookingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsManager.swift; sourceTree = "<group>"; };
+		485B3685309483FC00DA5E4D /* BarberApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplicationView.swift; sourceTree = "<group>"; };
 		4863B6F53082764400CC2ECB /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				48D5F62B3031B9880018502A /* ProfileView.swift */,
+				485B3685309483FC00DA5E4D /* BarberApplicationView.swift */,
 				485B367E3093844B00DA5E4D /* AboutProjectView.swift */,
 				485B367C309162C100DA5E4D /* SavedBarbersView.swift */,
 				485B367A3091614800DA5E4D /* SavedBarbersManager.swift */,
@@ -215,6 +218,7 @@
 				48FEDF97302BDDD40017569D /* HomeView.swift in Sources */,
 				485B367B3091614800DA5E4D /* SavedBarbersManager.swift in Sources */,
 				48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */,
+				485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */,
 				48FEDF9B302BDF0D0017569D /* BarberCardView.swift in Sources */,
 				485B368130939F4E00DA5E4D /* BookingsManager.swift in Sources */,
 				48FEDF9D302CE0660017569D /* FilterView.swift in Sources */,
