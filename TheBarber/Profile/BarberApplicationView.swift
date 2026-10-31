@@ -97,7 +97,7 @@ struct BarberApplicationView: View {
                     Text("Submit Application")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 34)
+                        .frame(height: 30)
                         .foregroundColor(isFormValid ? .white : .secondary)
                 }
                 .listRowBackground(isFormValid ? Color.blue : Color(.systemGray5))
@@ -107,6 +107,7 @@ struct BarberApplicationView: View {
         .navigationTitle("Barber partner application")
         .navigationBarTitleDisplayMode(.inline)
         .listSectionSpacing(.compact)
+        .contentMargins(.top, 4, for: .scrollContent)
         
         .alert("Application Received!", isPresented: $showSuccessAlert) {
             Button("Done") {
