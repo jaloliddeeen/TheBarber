@@ -16,6 +16,8 @@ struct BookingReviewView: View {
     @Binding var navPath: NavigationPath
     
     @EnvironmentObject var bookingsManager: BookingsManager
+    @EnvironmentObject var notificationsManager: NotificationsManager
+    
     @State private var paymentMethod = "Apple pay"
     let paymentMethods = ["Card", "Cash"]
     
@@ -53,6 +55,14 @@ struct BookingReviewView: View {
                     time: selectedTime,
                     paymentMethod: paymentMethod
                 )
+                
+                notificationsManager.sendAppointmentNotification(
+                    shopName: barber.name,
+                    date: formattedDate,
+                    time: selectedTime,
+                    price: "$\(barber.price)"
+                )
+                
                 navPath.append(AppRoute.success)
             }) {
                 Text("Confirm booking")

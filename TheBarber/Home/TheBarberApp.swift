@@ -13,6 +13,7 @@ struct TheBarberApp: App {
     
     @StateObject private var savedManager = SavedBarbersManager()
     @StateObject private var bookingsManager = BookingsManager()
+    @StateObject private var notificationsManager = NotificationsManager()
     
     var body: some Scene {
         WindowGroup {
@@ -21,6 +22,7 @@ struct TheBarberApp: App {
                     MainTabView()
                         .environmentObject(savedManager)
                         .environmentObject(bookingsManager)
+                        .environmentObject(notificationsManager)
                         .transition(.opacity)
                 } else {
                     RegisterView()

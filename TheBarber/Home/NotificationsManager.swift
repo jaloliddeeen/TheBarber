@@ -11,8 +11,11 @@ import UserNotifications
 struct BarberNotification: Identifiable {
     let id = UUID()
     let title: String
-    let message: String
+    let shopName: String
+    let date: String
     let time: String
+    let price: String
+    let timeAgo: String
 }
 
 class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
@@ -32,11 +35,15 @@ class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenter
         }
     }
     
-    func sendAppointmentNotification(shopName: String, date: String, time: String) {
+    func sendAppointmentNotification(shopName: String, date: String, time: String, price: String) {
         let newNotification = BarberNotification(
-            title: "Appointment confirmed",
-            message: "Your haircut at \(shopName) is booked for \(date) at \(time).",
-            time: "Just now")
+            title: "Appointment Confirmed",
+            shopName: shopName,
+            date: date,
+            time: time,
+            price: price,
+            timeAgo: "Just now"
+        )
         
         DispatchQueue.main.async {
             withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
@@ -44,29 +51,33 @@ class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenter
             }
         }
         
-        // trigger with sound
-        let content = UNMutableNotificationContent()
-        content.title = "Appointment confirmed"
-        content.body = "Your haircut at \(shopName) is confirmed for \(date) at \(time)."
-        content.sound = .default
-        
-        //trigger after 1 sec
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Failed to schedule: \(error.localizedDescription)")
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .notDetermined {
+                self.requestPermission()
+            }
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Appointment Confirmed ✂️"
+            content.body = "Your haircut at \(shopName) is confirmed for \(date) at \(time)."
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1.5, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("Failed to schedule notification: \(error.localizedDescription)")
+                }
             }
         }
-        
-        // display on app
-        func userNotificationCenter(
-            _ center: UNUserNotificationCenter,
-            willPresent notification: UNNotification,
-            withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-        ) {
-            completionHandler([.banner, .sound, .badge])
-        }
+    }
+    
+    // display on app
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound, .list, .badge])
     }
 }

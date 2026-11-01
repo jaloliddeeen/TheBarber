@@ -36,9 +36,9 @@ struct BookingSuccessView: View {
 
             VStack(spacing: 12) {
                 Button(action: {
-                    navPath = NavigationPath()
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        selectedTab = 1
+                    selectedTab = 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        navPath = NavigationPath()
                     }
                 }) {
                     Text("View Booking")

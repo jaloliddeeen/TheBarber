@@ -9,50 +9,72 @@ import SwiftUI
 
 struct NotificationsView: View {
     @Environment(\.dismiss) private var dismiss
-    
-    let notifications: [BarberNotification] = [
-        BarberNotification(
-            title: "Appointment Confirmed",
-            message: "Your haircut at John Barbershop is booked for tomorrow at 14:00.",
-            time: "10m ago"
-        ),
-        BarberNotification(
-            title: "Appointment Reminder",
-            message: "You have an appointment coming up in 1 hour.",
-            time: "2h ago"
-        ),
-        BarberNotification(
-            title: "Special Offer",
-            message: "Get 20% off beard trims this weekend.",
-            time: "1d ago"
-        ),
-        BarberNotification(
-            title: "Review Visit",
-            message: "How was your recent haircut? Tap to leave a quick rating.",
-            time: "3d ago"
-        )
-    ]
+    @EnvironmentObject var notificationsManager: NotificationsManager
     
     var body: some View {
         NavigationStack {
-            List(notifications) { item in
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Text(item.title)
-                            .font(.headline)
-                        
-                        Spacer()
-                        
-                        Text(item.time)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+            Group {
+                if notificationsManager.notifications.isEmpty {
+                    ContentUnavailableView(
+                        "No notifications",
+                        systemImage: "bell.slash",
+                        description: Text("You're all caught up! Booking updates will appear here.")
+                    )
+                } else {
+                    List(notificationsManager.notifications) { item in
+                        HStack(alignment: .top, spacing: 12) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .fill(Color.blue.opacity(0.12))
+                                    .frame(width: 44, height: 44)
+                                
+                                Image(systemName: "calendar.badge.checkmark")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(.blue)
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(item.title)
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.primary)
+                                    
+                                    Spacer()
+                                    
+                                    Text(item.timeAgo)
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Text(item.shopName)
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                
+                                HStack(spacing: 6) {
+                                    Text("\(item.date) at \(item.time)")
+                                    Text("•")
+                                    Text(item.price)
+                                        .fontWeight(.semibold)
+                                }
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                                
+                                // Status badge
+                                Text("Confirmed")
+                                    .font(.caption2)
+                                    .fontWeight(.bold)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
+                                    .background(Color.green.opacity(0.12))
+                                    .foregroundColor(.green)
+                                    .clipShape(Capsule())
+                                    .padding(.top, 2)
+                            }
+                        }
+                        .padding(.vertical, 4)
                     }
-                    
-                    Text(item.message)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
                 }
-                .padding(.vertical, 4)
             }
             .navigationTitle("Notifications")
             .navigationBarTitleDisplayMode(.inline)
@@ -69,4 +91,5 @@ struct NotificationsView: View {
 
 #Preview {
     NotificationsView()
+        .environmentObject(NotificationsManager())
 }

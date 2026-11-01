@@ -13,6 +13,7 @@ struct MainTabView: View {
     
     @StateObject private var bookingsManager = BookingsManager()
     @StateObject private var savedManager = SavedBarbersManager()
+    @StateObject private var notificationsManager = NotificationsManager()
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -50,6 +51,7 @@ struct MainTabView: View {
         }
         .environmentObject(savedManager)
         .environmentObject(bookingsManager)
+        .environmentObject(notificationsManager)
     }
 }
 
