@@ -89,6 +89,7 @@ struct BookingReviewView: View {
                 name: "John Barber",
                 location: "Charlie street",
                 price: 120,
+                distance: "7km",
                 rating: 4.5,
                 imageName: "barber1"
             ),

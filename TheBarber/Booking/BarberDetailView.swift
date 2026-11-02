@@ -201,6 +201,7 @@ struct BarberDetailView: View {
             name: "James Barber",
             location: "Charlie street, 67th",
             price: 120,
+            distance: "7 km",
             rating: 4.5,
             imageName: "barber1"
         ),

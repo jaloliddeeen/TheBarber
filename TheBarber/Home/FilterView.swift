@@ -7,46 +7,76 @@
 
 import SwiftUI
 
+struct FilterOptions: Equatable {
+    var maxPrice: Double = 150
+    var minRating: Double = 0.0
+    var sortBy: SortOption = .recommended
+    
+    enum SortOption: String, CaseIterable, Identifiable {
+        case recommended = "Recommended"
+        case highestRated = "Highest rated"
+        case priceLowToHigh = "Price low to high"
+        case priceHighToLow = "Price high to low"
+        
+        var id: String { rawValue }
+    }
+    
+    var isFiltered: Bool {
+        maxPrice < 150 || minRating > 0.0 || sortBy != .recommended
+    }
+    
+    mutating func reset() {
+        maxPrice = 150
+        minRating = 0.0
+        sortBy = .recommended
+    }
+}
+
 struct FilterView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var maxPrice: Double = 150
-    @State private var selectedDistance: String = "Any"
-    @State private var selectedRating: String = "All"
+    @Binding var filterOptions: FilterOptions
     
-    let distanceOptions = ["Any", "1-3 km", "3-7 km", "7-12 km"]
-    let ratingOptions = ["All", "3.0+", "4.0+", "5.0"]
+    @State private var tempOptions: FilterOptions = FilterOptions()
+    
+    let ratingOptions: [(label: String, value: Double)] = [
+        ("All", 0.0),
+        ("4.0+", 4.0),
+        ("4.5+", 4.5),
+        ("4.8+", 4.8)
+    ]
     
     var body: some View {
         NavigationStack{
-            Form{
-                Section(header: Text("Filter by price")) {
-                    VStack(alignment: .leading, spacing: 10) {
+            Form {
+                Section("Sort by") {
+                    Picker("Sort by", selection: $tempOptions.sortBy) {
+                        ForEach(FilterOptions.SortOption.allCases) { option in
+                            Text(option.rawValue).tag(option)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                
+                Section("Filter by price") {
+                    VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text("Max price:")
+                            Text("Max price")
                             Spacer()
-                            Text("$\(Int(maxPrice))")
-                                .bold()
+                            Text("$\(Int(tempOptions.maxPrice))")
+                                .font(.headline)
                                 .foregroundColor(.blue)
                         }
-                        Slider(value: $maxPrice, in: 30...200, step: 5)
+                        Slider(value: $tempOptions.maxPrice, in: 50...150, step: 5)
                     }
                     .padding(.vertical, 4)
                 }
-                Section(header: Text("Distance")) {
-                    Picker("Distance", selection: $selectedDistance) {
-                        ForEach(distanceOptions, id: \.self) { option in
-                            Text(option).tag(option)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
                 
-                Section(header: Text("Rating")) {
-                    Picker("Rating", selection: $selectedRating) {
-                        ForEach(ratingOptions, id: \.self) { option in
-                            Text(option).tag(option)
+                Section("Minimum rating") {
+                    Picker("Rating", selection: $tempOptions.minRating) {
+                        ForEach(ratingOptions, id: \.value) { option in
+                            Text(option.label).tag(option.value)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -54,23 +84,35 @@ struct FilterView: View {
                 
                 Section {
                     Button(action: {
+                        filterOptions = tempOptions
                         dismiss()
                     }) {
-                        HStack {
-                            Spacer()
-                            Text("Apply filters")
-                                .font(.headline)
-                                .bold()
-                            Spacer()
-                        }
+                        Text("Apply Filters")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 36)
+                            .foregroundColor(.white)
                     }
+                    .listRowBackground(Color.blue)
                 }
             }
             .navigationTitle("Filter")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                tempOptions = filterOptions
+            }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Reset") {
+                        withAnimation {
+                            tempOptions.reset()
+                        }
+                    }
+                    .disabled(!tempOptions.isFiltered)
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
@@ -80,5 +122,5 @@ struct FilterView: View {
 }
 
 #Preview {
-    FilterView()
+    FilterView(filterOptions: .constant(FilterOptions()))
 }

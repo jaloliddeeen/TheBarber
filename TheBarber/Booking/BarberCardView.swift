@@ -13,6 +13,7 @@ struct Barber: Identifiable, Hashable {
     let name: String
     let location: String
     let price: Int
+    let distance: String
     let rating: Double
     let imageName: String
 }
@@ -60,10 +61,20 @@ struct BarberCardView: View {
                 .font(.headline)
                 .lineLimit(1)
             
-            Text("$\(barber.price)")
-                .font(.subheadline)
-                .bold()
-                .foregroundColor(.blue)
+            HStack {
+                Text(barber.distance)
+                    .font(.subheadline)
+                    .foregroundStyle(.primary)
+                
+                Text("•")
+                    .foregroundColor(.secondary)
+                    
+                
+                Text("$\(barber.price)")
+                    .font(.subheadline)
+                    .bold()
+                    .foregroundColor(.blue)
+            }
             
             Text("Book now")
                 .font(.subheadline)
@@ -87,6 +98,7 @@ struct BarberCardView: View {
             name: "James Barber",
             location: "Charlie street, 67th",
             price: 120,
+            distance: "7 km",
             rating: 4.5,
             imageName: "barber1"
         )

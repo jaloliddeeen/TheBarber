@@ -9,7 +9,7 @@ import Foundation
 
 class SavedBarbersManager: ObservableObject {
     @Published var savedBarbers: [Barber] = [
-        Barber(name: "John barbershop", location: "Main street avenue", price: 120, rating: 4.5, imageName: "barber1")
+        Barber(name: "John barbershop", location: "Main street avenue", price: 120, distance: "7 km", rating: 4.5, imageName: "barber1")
     ]
     
     func isSaved(_ barber: Barber) -> Bool {
