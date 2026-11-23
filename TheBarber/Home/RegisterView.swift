@@ -10,12 +10,7 @@ import SwiftUI
 struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @AppStorage("hasCompletedRegistration") private var hasCompletedRegistration: Bool = false
-    @AppStorage("userName") private var storedName: String = ""
-    @AppStorage("userPhone") private var storedPhone: String = ""
-    
-    @State private var name: String = ""
-    @State private var phoneNumber: String = ""
+    @StateObject private var viewModel = RegisterViewModel()
     @FocusState private var focusedField: Field?
     
     enum Field {
@@ -23,9 +18,6 @@ struct RegisterView: View {
         case phone
     }
     
-    private var isFormValid: Bool {
-        !name.trimmingCharacters(in: .whitespaces).isEmpty && phoneNumber.count >= 9
-    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {
@@ -51,7 +43,7 @@ struct RegisterView: View {
                     Image(systemName: "person.fill")
                         .foregroundColor(.secondary)
                     
-                    TextField("First Name", text: $name)
+                    TextField("First Name", text: $viewModel.name)
                         .textContentType(.givenName)
                         .focused($focusedField, equals: .name)
                         .submitLabel(.next)
@@ -67,7 +59,7 @@ struct RegisterView: View {
                     Image(systemName: "phone.fill")
                         .foregroundColor(.secondary)
                     
-                    TextField("Phone Number", text: $phoneNumber)
+                    TextField("Phone Number", text: $viewModel.phoneNumber)
                         .keyboardType(.phonePad)
                         .textContentType(.telephoneNumber)
                         .focused($focusedField, equals: .phone)
@@ -82,9 +74,7 @@ struct RegisterView: View {
             VStack(spacing: 8) {
                 Button(action: {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
-                        storedName = name.trimmingCharacters(in: .whitespaces)
-                        storedPhone = phoneNumber.trimmingCharacters(in: .whitespaces)
-                        hasCompletedRegistration = true
+                        viewModel.completeRegistration()
                     }
                     dismiss()
                 }) {
@@ -94,14 +84,14 @@ struct RegisterView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(isFormValid ? Color.blue : Color.blue.opacity(0.4))
+                        .background(viewModel.isFormValid ? Color.blue : Color.blue.opacity(0.4))
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
-                .disabled(!isFormValid)
+                .disabled(!viewModel.isFormValid)
                 
                 Button(action: {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
-                        hasCompletedRegistration = true
+                        viewModel.skipRegistration()
                     }
                     dismiss()
                 }) {
