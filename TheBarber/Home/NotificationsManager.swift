@@ -8,16 +8,6 @@
 import SwiftUI
 import UserNotifications
 
-struct BarberNotification: Identifiable {
-    let id = UUID()
-    let title: String
-    let shopName: String
-    let date: String
-    let time: String
-    let price: String
-    let timeAgo: String
-}
-
 class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
     @Published var notifications: [BarberNotification] = []
     

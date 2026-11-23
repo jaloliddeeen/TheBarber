@@ -15,6 +15,9 @@
 		485B36883095D12000DA5E4D /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B36873095D12000DA5E4D /* NotificationsManager.swift */; };
 		4863B6F63082764400CC2ECB /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863B6F53082764400CC2ECB /* NotificationsView.swift */; };
 		48A0ED2C30B4584100E10D28 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2B30B4584100E10D28 /* RegisterViewModel.swift */; };
+		48A0ED2E30B4A5DA00E10D28 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */; };
+		48A0ED3030B4A9C000E10D28 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */; };
+		48A0ED3230B4A9D800E10D28 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
 		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
@@ -40,6 +43,9 @@
 		485B36873095D12000DA5E4D /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		4863B6F53082764400CC2ECB /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		48A0ED2B30B4584100E10D28 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -88,8 +94,11 @@
 				48A0ED2B30B4584100E10D28 /* RegisterViewModel.swift */,
 				48FEDF94302BCBE30017569D /* MainTabView.swift */,
 				48FEDF96302BDDD40017569D /* HomeView.swift */,
+				48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */,
 				4863B6F53082764400CC2ECB /* NotificationsView.swift */,
 				485B36873095D12000DA5E4D /* NotificationsManager.swift */,
+				48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */,
+				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
 				48FEDF9C302CE0660017569D /* FilterView.swift */,
 			);
 			path = Home;
@@ -226,11 +235,14 @@
 				48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */,
 				485B36883095D12000DA5E4D /* NotificationsManager.swift in Sources */,
 				485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */,
+				48A0ED3230B4A9D800E10D28 /* NotificationsViewModel.swift in Sources */,
 				48A0ED2C30B4584100E10D28 /* RegisterViewModel.swift in Sources */,
+				48A0ED3030B4A9C000E10D28 /* LocalNotificationService.swift in Sources */,
 				48FEDF9B302BDF0D0017569D /* BarberCardView.swift in Sources */,
 				485B368130939F4E00DA5E4D /* BookingsManager.swift in Sources */,
 				48FEDF9D302CE0660017569D /* FilterView.swift in Sources */,
 				4863B6F63082764400CC2ECB /* NotificationsView.swift in Sources */,
+				48A0ED2E30B4A5DA00E10D28 /* HomeViewModel.swift in Sources */,
 				48FEDF95302BCBE30017569D /* MainTabView.swift in Sources */,
 				48FEDFA1302DC1C10017569D /* BookingReviewView.swift in Sources */,
 				485B367F3093844B00DA5E4D /* AboutProjectView.swift in Sources */,
