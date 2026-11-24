@@ -12,7 +12,6 @@
 		485B367F3093844B00DA5E4D /* AboutProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B367E3093844B00DA5E4D /* AboutProjectView.swift */; };
 		485B368130939F4E00DA5E4D /* BookingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B368030939F4E00DA5E4D /* BookingsManager.swift */; };
 		485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B3685309483FC00DA5E4D /* BarberApplicationView.swift */; };
-		485B36883095D12000DA5E4D /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B36873095D12000DA5E4D /* NotificationsManager.swift */; };
 		4863B6F63082764400CC2ECB /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863B6F53082764400CC2ECB /* NotificationsView.swift */; };
 		48A0ED2C30B4584100E10D28 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2B30B4584100E10D28 /* RegisterViewModel.swift */; };
 		48A0ED2E30B4A5DA00E10D28 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */; };
@@ -40,7 +39,6 @@
 		485B367E3093844B00DA5E4D /* AboutProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutProjectView.swift; sourceTree = "<group>"; };
 		485B368030939F4E00DA5E4D /* BookingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsManager.swift; sourceTree = "<group>"; };
 		485B3685309483FC00DA5E4D /* BarberApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplicationView.swift; sourceTree = "<group>"; };
-		485B36873095D12000DA5E4D /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		4863B6F53082764400CC2ECB /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		48A0ED2B30B4584100E10D28 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 				48FEDF96302BDDD40017569D /* HomeView.swift */,
 				48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */,
 				4863B6F53082764400CC2ECB /* NotificationsView.swift */,
-				485B36873095D12000DA5E4D /* NotificationsManager.swift */,
 				48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */,
 				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
 				48FEDF9C302CE0660017569D /* FilterView.swift */,
@@ -233,7 +230,6 @@
 				48FEDF97302BDDD40017569D /* HomeView.swift in Sources */,
 				485B367B3091614800DA5E4D /* SavedBarbersManager.swift in Sources */,
 				48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */,
-				485B36883095D12000DA5E4D /* NotificationsManager.swift in Sources */,
 				485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */,
 				48A0ED3230B4A9D800E10D28 /* NotificationsViewModel.swift in Sources */,
 				48A0ED2C30B4584100E10D28 /* RegisterViewModel.swift in Sources */,

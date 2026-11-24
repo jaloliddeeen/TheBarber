@@ -16,7 +16,7 @@ struct BookingReviewView: View {
     @Binding var navPath: NavigationPath
     
     @EnvironmentObject var bookingsManager: BookingsManager
-    @EnvironmentObject var notificationsManager: NotificationsManager
+    @EnvironmentObject var notificationsViewModel: NotificationsViewModel
     
     @State private var paymentMethod = "Apple pay"
     let paymentMethods = ["Card", "Cash"]
@@ -56,7 +56,7 @@ struct BookingReviewView: View {
                     paymentMethod: paymentMethod
                 )
                 
-                notificationsManager.sendAppointmentNotification(
+                notificationsViewModel.sendAppointmentNotification(
                     shopName: barber.name,
                     date: formattedDate,
                     time: selectedTime,
