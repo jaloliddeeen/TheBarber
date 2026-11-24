@@ -21,6 +21,7 @@
 		48A0ED3630B5948100E10D28 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3530B5948100E10D28 /* FilterViewModel.swift */; };
 		48A0ED3830B599BF00E10D28 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3730B599BF00E10D28 /* MapViewModel.swift */; };
 		48A0ED3A30B59A2000E10D28 /* MapBarberLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3930B59A2000E10D28 /* MapBarberLocation.swift */; };
+		48A0ED3C30B59D7F00E10D28 /* BarberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3B30B59D7F00E10D28 /* BarberDetailViewModel.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
 		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
@@ -52,6 +53,7 @@
 		48A0ED3530B5948100E10D28 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		48A0ED3730B599BF00E10D28 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		48A0ED3930B59A2000E10D28 /* MapBarberLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBarberLocation.swift; sourceTree = "<group>"; };
+		48A0ED3B30B59D7F00E10D28 /* BarberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberDetailViewModel.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				48FEDF9A302BDF0D0017569D /* BarberCardView.swift */,
 				48FEDF9E302D1D990017569D /* BarberDetailView.swift */,
+				48A0ED3B30B59D7F00E10D28 /* BarberDetailViewModel.swift */,
 				48FEDFA0302DC1C10017569D /* BookingReviewView.swift */,
 				48FEDFA2302E68650017569D /* BookingSuccessView.swift */,
 				48D5F62530311CF00018502A /* BookingsView.swift */,
@@ -254,6 +257,7 @@
 				485B368130939F4E00DA5E4D /* BookingsManager.swift in Sources */,
 				48FEDF9D302CE0660017569D /* FilterView.swift in Sources */,
 				4863B6F63082764400CC2ECB /* NotificationsView.swift in Sources */,
+				48A0ED3C30B59D7F00E10D28 /* BarberDetailViewModel.swift in Sources */,
 				48A0ED2E30B4A5DA00E10D28 /* HomeViewModel.swift in Sources */,
 				48FEDF95302BCBE30017569D /* MainTabView.swift in Sources */,
 				48FEDFA1302DC1C10017569D /* BookingReviewView.swift in Sources */,

@@ -8,35 +8,31 @@
 import SwiftUI
 
 struct BarberDetailView: View {
-    let barber: Barber
+    @StateObject private var viewModel: BarberDetailViewModel
     
     @EnvironmentObject var savedManager: SavedBarbersManager
-    
-    @State private var selectedDate: Date = Date()
-    @State private var selectedTime: String = "12:00"
     
     @Binding var selectedTab: Int
     @Binding var navPath: NavigationPath
     
-    let timeSlots = ["11:15", "12:00", "12:45", "13:30", "14:15", "15:00"]
-    let portfolioImages = ["portfolio2", "portfolio3", "portfolio4", "portfolio5"]
-    
-    private var isBarberSaved: Bool {
-        savedManager.isSaved(barber)
+    init(barber: Barber, selectedTab: Binding<Int>, navPath: Binding<NavigationPath>) {
+        _viewModel = StateObject(wrappedValue: BarberDetailViewModel(barber: barber))
+        self._selectedTab = selectedTab
+        self._navPath = navPath
     }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 16) {
-                    Image(barber.imageName)
+                    Image(viewModel.barber.imageName)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 70, height: 70)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                     
                     VStack(alignment:.leading, spacing: 4) {
-                        Text(barber.name)
+                        Text(viewModel.barber.name)
                             .font(.title2)
                             .bold()
                         
@@ -60,7 +56,7 @@ struct BarberDetailView: View {
                             Text("Address")
                                 .font(.body)
                                 .foregroundStyle(.secondary)
-                            Text(barber.location)
+                            Text(viewModel.barber.location)
                                 .font(.body)
                                 .bold()
                         }
@@ -77,7 +73,7 @@ struct BarberDetailView: View {
                                 .font(.body)
                                 .foregroundStyle(.secondary)
 
-                            Text("$\(barber.price) - $\(barber.price + 50)")
+                            Text("$\(viewModel.barber.price) - $\(viewModel.barber.price + 50)")
                                 .font(.body)
                                 .bold()
                         }
@@ -98,7 +94,7 @@ struct BarberDetailView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            ForEach(portfolioImages, id: \.self) { img in
+                            ForEach(viewModel.portfolioImages, id: \.self) { img in
                                 Image(img)
                                     .resizable()
                                     .scaledToFill()
@@ -118,7 +114,7 @@ struct BarberDetailView: View {
                         .font(.title2)
                         .bold()
                     
-                    DatePicker("Select date", selection: $selectedDate, displayedComponents: [.date])
+                    DatePicker("Select date", selection: $viewModel.selectedDate, displayedComponents: [.date])
                         .datePickerStyle(.graphical)
                         .background(Color(.secondarySystemGroupedBackground))
                         .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -134,17 +130,17 @@ struct BarberDetailView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach(timeSlots, id: \.self) { time in
+                            ForEach(viewModel.timeSlots, id: \.self) { time in
                                 Button(action: {
-                                    selectedTime = time
+                                    viewModel.selectTime(time)
                                 }) {
                                     Text(time)
                                         .font(.subheadline)
                                         .bold()
                                         .padding(.horizontal, 16)
                                         .padding(.vertical, 10)
-                                        .background(selectedTime == time ? Color.blue : Color(.tertiarySystemGroupedBackground))
-                                        .foregroundColor(selectedTime == time ? .white : .primary)
+                                        .background(viewModel.selectedTime == time ? Color.blue : Color(.tertiarySystemGroupedBackground))
+                                        .foregroundColor(viewModel.selectedTime == time ? .white : .primary)
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                 }
                             }
@@ -152,7 +148,7 @@ struct BarberDetailView: View {
                     }
                 }
                 Button(action: {
-                    navPath.append(AppRoute.review(barber, selectedDate, selectedTime))
+                    navPath.append(viewModel.makeReviewRoute())
                 }) {
                     Text("Book appointment")
                         .font(.headline)
@@ -167,27 +163,27 @@ struct BarberDetailView: View {
             }
             .padding()
         }
-        .navigationTitle(barber.name)
+        .navigationTitle(viewModel.barber.name)
         .navigationBarTitleDisplayMode(.inline)
         
         
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 ShareLink(
-                    item: "\(barber.name), located at \(barber.location). Book on TheBarber!",
-                    subject: Text(barber.name),
-                    message: Text("Check out \(barber.name) on TheBarber")
+                    item: viewModel.shareItemText,
+                    subject: Text(viewModel.barber.name),
+                    message: Text(viewModel.shareMessageText)
                 ) {
                     Image(systemName: "square.and.arrow.up")
                 }
                 
                 Button(action: {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                        savedManager.toggleSave(barber)
+                        viewModel.toggleSave(in: savedManager)
                     }
                 }) {
-                    Image(systemName: isBarberSaved ? "bookmark.fill" : "bookmark")
-                        .foregroundColor(isBarberSaved ? .blue : .primary)
+                    Image(systemName: viewModel.isSaved(in: savedManager) ? "bookmark.fill" : "bookmark")
+                        .foregroundColor(viewModel.isSaved(in: savedManager) ? .blue : .primary)
                         .contentTransition(.symbolEffect(.replace))
                 }
             }
