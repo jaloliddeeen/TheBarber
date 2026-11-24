@@ -7,51 +7,25 @@
 
 import SwiftUI
 
-struct FilterOptions: Equatable {
-    var maxPrice: Double = 150
-    var minRating: Double = 0.0
-    var sortBy: SortOption = .recommended
-    
-    enum SortOption: String, CaseIterable, Identifiable {
-        case recommended = "Recommended"
-        case highestRated = "Highest rated"
-        case priceLowToHigh = "Price low to high"
-        case priceHighToLow = "Price high to low"
-        
-        var id: String { rawValue }
-    }
-    
-    var isFiltered: Bool {
-        maxPrice < 150 || minRating > 0.0 || sortBy != .recommended
-    }
-    
-    mutating func reset() {
-        maxPrice = 150
-        minRating = 0.0
-        sortBy = .recommended
-    }
-}
-
 struct FilterView: View {
-    
     @Environment(\.dismiss) private var dismiss
+        
+    @StateObject private var viewModel: FilterViewModel
     
-    @Binding var filterOptions: FilterOptions
-    
-    @State private var tempOptions: FilterOptions = FilterOptions()
-    
-    let ratingOptions: [(label: String, value: Double)] = [
-        ("All", 0.0),
-        ("4.0+", 4.0),
-        ("4.5+", 4.5),
-        ("4.8+", 4.8)
-    ]
+    init(filterOptions: Binding<FilterOptions>) {
+        _viewModel = StateObject(wrappedValue: FilterViewModel(
+            initialOptions: filterOptions.wrappedValue,
+            onApply: { newOptions in
+                filterOptions.wrappedValue = newOptions
+            }
+        ))
+    }
     
     var body: some View {
         NavigationStack{
             Form {
                 Section("Sort by") {
-                    Picker("Sort by", selection: $tempOptions.sortBy) {
+                    Picker("Sort by", selection: $viewModel.draftOptions.sortBy) {
                         ForEach(FilterOptions.SortOption.allCases) { option in
                             Text(option.rawValue).tag(option)
                         }
@@ -64,18 +38,18 @@ struct FilterView: View {
                         HStack {
                             Text("Max price")
                             Spacer()
-                            Text("$\(Int(tempOptions.maxPrice))")
+                            Text("$\(Int(viewModel.draftOptions.maxPrice))")
                                 .font(.headline)
                                 .foregroundColor(.blue)
                         }
-                        Slider(value: $tempOptions.maxPrice, in: 50...150, step: 5)
+                        Slider(value: $viewModel.draftOptions.maxPrice, in: 50...150, step: 5)
                     }
                     .padding(.vertical, 4)
                 }
                 
                 Section("Minimum rating") {
-                    Picker("Rating", selection: $tempOptions.minRating) {
-                        ForEach(ratingOptions, id: \.value) { option in
+                    Picker("Rating", selection: $viewModel.draftOptions.minRating) {
+                        ForEach(viewModel.ratingOptions, id: \.value) { option in
                             Text(option.label).tag(option.value)
                         }
                     }
@@ -84,7 +58,7 @@ struct FilterView: View {
                 
                 Section {
                     Button(action: {
-                        filterOptions = tempOptions
+                        viewModel.apply()
                         dismiss()
                     }) {
                         Text("Apply Filters")
@@ -98,17 +72,14 @@ struct FilterView: View {
             }
             .navigationTitle("Filter")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                tempOptions = filterOptions
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Reset") {
                         withAnimation {
-                            tempOptions.reset()
+                            viewModel.reset()
                         }
                     }
-                    .disabled(!tempOptions.isFiltered)
+                    .disabled(!viewModel.canReset)
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {

@@ -17,6 +17,8 @@
 		48A0ED2E30B4A5DA00E10D28 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */; };
 		48A0ED3030B4A9C000E10D28 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */; };
 		48A0ED3230B4A9D800E10D28 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */; };
+		48A0ED3430B593F800E10D28 /* FilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3330B593F800E10D28 /* FilterOptions.swift */; };
+		48A0ED3630B5948100E10D28 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED3530B5948100E10D28 /* FilterViewModel.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
 		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
@@ -44,6 +46,8 @@
 		48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
 		48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		48A0ED3330B593F800E10D28 /* FilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptions.swift; sourceTree = "<group>"; };
+		48A0ED3530B5948100E10D28 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 				48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */,
 				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
 				48FEDF9C302CE0660017569D /* FilterView.swift */,
+				48A0ED3330B593F800E10D28 /* FilterOptions.swift */,
+				48A0ED3530B5948100E10D28 /* FilterViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48FEDFA3302E68650017569D /* BookingSuccessView.swift in Sources */,
+				48A0ED3430B593F800E10D28 /* FilterOptions.swift in Sources */,
 				48D5F62630311CF00018502A /* BookingsView.swift in Sources */,
 				48FEDF9F302D1D9A0017569D /* BarberDetailView.swift in Sources */,
 				48D5F62A3031ADA10018502A /* MapView.swift in Sources */,
@@ -230,6 +237,7 @@
 				48FEDF97302BDDD40017569D /* HomeView.swift in Sources */,
 				485B367B3091614800DA5E4D /* SavedBarbersManager.swift in Sources */,
 				48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */,
+				48A0ED3630B5948100E10D28 /* FilterViewModel.swift in Sources */,
 				485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */,
 				48A0ED3230B4A9D800E10D28 /* NotificationsViewModel.swift in Sources */,
 				48A0ED2C30B4584100E10D28 /* RegisterViewModel.swift in Sources */,
