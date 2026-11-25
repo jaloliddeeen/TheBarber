@@ -31,6 +31,8 @@
 		48A0ED4A30B6A2FB00E10D28 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED4930B6A2FB00E10D28 /* EditProfileViewModel.swift */; };
 		48A0ED4C30B6A4BC00E10D28 /* ProfileHeaderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED4B30B6A4BC00E10D28 /* ProfileHeaderCard.swift */; };
 		48A0ED4E30B6A50D00E10D28 /* ProfileMenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED4D30B6A50D00E10D28 /* ProfileMenuRow.swift */; };
+		48A0ED5230B7409200E10D28 /* BarberApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5130B7409200E10D28 /* BarberApplication.swift */; };
+		48A0ED5430B740C300E10D28 /* BarberApplicationVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
 		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
@@ -72,6 +74,8 @@
 		48A0ED4930B6A2FB00E10D28 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		48A0ED4B30B6A4BC00E10D28 /* ProfileHeaderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCard.swift; sourceTree = "<group>"; };
 		48A0ED4D30B6A50D00E10D28 /* ProfileMenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuRow.swift; sourceTree = "<group>"; };
+		48A0ED5130B7409200E10D28 /* BarberApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplication.swift; sourceTree = "<group>"; };
+		48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplicationVModel.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -104,13 +108,15 @@
 			isa = PBXGroup;
 			children = (
 				48D5F62B3031B9880018502A /* ProfileView.swift */,
+				48A0ED4530B6A1CE00E10D28 /* ProfileViewModel.swift */,
 				48A0ED4B30B6A4BC00E10D28 /* ProfileHeaderCard.swift */,
 				48A0ED4D30B6A50D00E10D28 /* ProfileMenuRow.swift */,
 				48A0ED4730B6A23F00E10D28 /* EditProfileView.swift */,
 				48A0ED4930B6A2FB00E10D28 /* EditProfileViewModel.swift */,
 				48A0ED4330B6A13B00E10D28 /* UserProfile.swift */,
-				48A0ED4530B6A1CE00E10D28 /* ProfileViewModel.swift */,
 				485B3685309483FC00DA5E4D /* BarberApplicationView.swift */,
+				48A0ED5130B7409200E10D28 /* BarberApplication.swift */,
+				48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */,
 				485B367E3093844B00DA5E4D /* AboutProjectView.swift */,
 				485B367C309162C100DA5E4D /* SavedBarbersView.swift */,
 				485B367A3091614800DA5E4D /* SavedBarbersManager.swift */,
@@ -263,11 +269,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48A0ED5430B740C300E10D28 /* BarberApplicationVModel.swift in Sources */,
 				48FEDFA3302E68650017569D /* BookingSuccessView.swift in Sources */,
 				48A0ED3430B593F800E10D28 /* FilterOptions.swift in Sources */,
 				48D5F62630311CF00018502A /* BookingsView.swift in Sources */,
 				48A0ED4830B6A23F00E10D28 /* EditProfileView.swift in Sources */,
 				48FEDF9F302D1D9A0017569D /* BarberDetailView.swift in Sources */,
+				48A0ED5230B7409200E10D28 /* BarberApplication.swift in Sources */,
 				48D5F62A3031ADA10018502A /* MapView.swift in Sources */,
 				48D5F62C3031B9880018502A /* ProfileView.swift in Sources */,
 				48A0ED3830B599BF00E10D28 /* MapViewModel.swift in Sources */,

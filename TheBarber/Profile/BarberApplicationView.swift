@@ -10,33 +10,8 @@ import SwiftUI
 struct BarberApplicationView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @State private var fullName: String = ""
-    @State private var email: String = ""
-    @State private var phoneNumber: String = ""
-    @State private var workPlace: String = ""
-    @State private var yearsOfExperience: Int = 3
-    @State private var specialization: String = "All-round Barber"
-    @State private var instagramHandle: String = ""
-    @State private var additionalNotes: String = ""
+    @StateObject private var viewModel = BarberApplicationVModel()
 
-    @State private var showSuccessAlert: Bool = false
-    
-    let specializations = [
-        "All-round Barber",
-        "Classic Haircuts",
-        "Beard Grooming",
-        "Hot Towel Shave",
-        "Hair Coloring"
-    ]
-    
-    private var isFormValid: Bool {
-        !fullName.trimmingCharacters(in: .whitespaces).isEmpty &&
-        email.contains("@") && email.contains(".") &&
-        phoneNumber.count >= 9 &&
-        !workPlace.trimmingCharacters(in: .whitespaces).isEmpty
-    }
-
- 
     var body: some View {
         Form {
             Section {
@@ -57,51 +32,62 @@ struct BarberApplicationView: View {
             }
             
             Section("Personal information") {
-                TextField("Full name", text: $fullName)
+                TextField("Full name", text: $viewModel.fullName)
                     .textContentType(.name)
-                TextField("Email address", text: $email)
+                TextField("Email address", text: $viewModel.email)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 
-                TextField("Phone number", text: $phoneNumber)
+                TextField("Phone number", text: $viewModel.phoneNumber)
                     .keyboardType(.phonePad)
                     .textContentType(.telephoneNumber)
             }
             
             Section("Professional background") {
-                TextField("Current work", text: $workPlace)
+                TextField("Current work", text: $viewModel.workPlace)
                 
-                Stepper("Experience: \(yearsOfExperience) \(yearsOfExperience == 1 ? "year" : "years")", value: $yearsOfExperience, in: 0...40)
+                Stepper(viewModel.experienceLabel, value: $viewModel.yearsOfExperience, in: 0...40)
                 
-                Picker("Main spec.", selection: $specialization) {
-                    ForEach(specializations, id: \.self) { spec in
-                        Text(spec).tag(spec)
+                Picker("Main spec.", selection: $viewModel.selectedSpecialization) {
+                    ForEach(viewModel.availableSpecializations) { spec in
+                        Text(spec.rawValue).tag(spec)
                     }
                 }
             }
             
-            Section(header: Text("Portfolio (optional)"), footer: Text("Providing your socials will make the process faster")) {
-                TextField("@instagram handle", text: $instagramHandle)
+            Section(
+                header: Text("Portfolio (optional)"),
+                footer: Text("Providing your socials will make the process faster")
+            ) {
+                TextField("@instagram handle", text: $viewModel.instagramHandle)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 
-                TextField("Additional notes", text: $additionalNotes)
+                TextField("Additional notes", text: $viewModel.additionalNotes)
             }
             
             Section {
                 Button(action: {
-                    showSuccessAlert = true
+                    viewModel.submitApplication()
                 }) {
-                    Text("Submit Application")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 30)
-                        .foregroundColor(isFormValid ? .white : .secondary)
+                    HStack {
+                        Spacer()
+                        if viewModel.isSubmitting {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text("Submit application")
+                                .font(.headline)
+                        }
+                        Spacer()
+                    }
+                    .frame(height: 30)
+                    .foregroundColor(viewModel.isFormValid ? .white : .secondary)
                 }
-                .listRowBackground(isFormValid ? Color.blue : Color(.systemGray5))
-                .disabled(!isFormValid)
+                .listRowBackground(viewModel.isFormValid ? Color.blue : Color(.systemGray5))
+                .disabled(!viewModel.isFormValid || viewModel.isSubmitting)
             }
         }
         .navigationTitle("Barber partner application")
@@ -109,12 +95,12 @@ struct BarberApplicationView: View {
         .listSectionSpacing(.compact)
         .contentMargins(.top, 4, for: .scrollContent)
         
-        .alert("Application Received!", isPresented: $showSuccessAlert) {
+        .alert("Application Received!", isPresented: $viewModel.showSuccessAlert) {
             Button("Done") {
                 dismiss()
             }
         } message: {
-            Text("Thank you, \(fullName)! We have received your application. Our onboarding team will get back to you via email or phone within 24 hours.")
+            Text(viewModel.successAlertMessage)
         }
     }
 }
