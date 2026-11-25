@@ -8,38 +8,43 @@
 import SwiftUI
 
 struct BookingReviewView: View {
-    let barber: Barber
-    let selectedDate: Date
-    let selectedTime: String
+    @StateObject private var viewModel: BookingReviewViewModel
     
     @Binding var selectedTab: Int
     @Binding var navPath: NavigationPath
     
     @EnvironmentObject var bookingsManager: BookingsManager
     @EnvironmentObject var notificationsViewModel: NotificationsViewModel
-    
-    @State private var paymentMethod = "Apple pay"
-    let paymentMethods = ["Card", "Cash"]
-    
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter.string(from: selectedDate)
+
+    init(
+        barber: Barber,
+        selectedDate: Date,
+        selectedTime: String,
+        selectedTab: Binding<Int>,
+        navPath: Binding<NavigationPath>
+    ) {
+        _viewModel = StateObject(wrappedValue: BookingReviewViewModel (
+            barber: barber,
+            selectedDate: selectedDate,
+            selectedTime: selectedTime
+        ))
+        self._selectedTab = selectedTab
+        self._navPath = navPath
     }
     
     var body: some View {
         VStack {
             Form {
                 Section {
-                    LabeledContent("Barber / Shop Name", value: barber.name)
-                    LabeledContent("Price Range", value: "$\(barber.price) - $\(barber.price + 50)")
-                    LabeledContent("Phone Number", value: "+48 982-422-312")
-                    LabeledContent("Appointment Time", value: "\(selectedTime) | \(formattedDate)")
+                    LabeledContent("Barber / Shop Name", value: viewModel.barber.name)
+                    LabeledContent("Price Range", value: "$\(viewModel.barber.price) - $\(viewModel.barber.price + 50)")
+                    LabeledContent("Phone Number", value: viewModel.contactPhone)
+                    LabeledContent("Appointment Time", value: viewModel.appointmentTimeDisplay)
                 }
                 
                 Section {
-                    Picker("Payment method", selection: $paymentMethod) {
-                        ForEach(paymentMethods, id: \.self) { method in
+                    Picker("Payment method", selection: $viewModel.paymentMethod) {
+                        ForEach(viewModel.paymentMethods, id: \.self) { method in
                             Text(method).tag(method)
                         }
                     }
@@ -49,21 +54,12 @@ struct BookingReviewView: View {
             
             
             Button( action: {
-                bookingsManager.addBooking(
-                    barber: barber,
-                    date: selectedDate,
-                    time: selectedTime,
-                    paymentMethod: paymentMethod
-                )
-                
-                notificationsViewModel.sendAppointmentNotification(
-                    shopName: barber.name,
-                    date: formattedDate,
-                    time: selectedTime,
-                    price: "$\(barber.price)"
-                )
-                
-                navPath.append(AppRoute.success)
+                viewModel.confirmBooking(
+                    bookingsManager: bookingsManager,
+                    notificationsViewModel: notificationsViewModel
+                ) {
+                    navPath.append(AppRoute.success)
+                }
             }) {
                 Text("Confirm booking")
                     .font(.headline)
@@ -98,5 +94,7 @@ struct BookingReviewView: View {
             selectedTab: .constant(0),
             navPath: .constant(NavigationPath())
         )
+        .environmentObject(BookingsManager())
+        .environmentObject(NotificationsViewModel())
     }
 }
