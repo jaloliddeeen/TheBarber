@@ -7,33 +7,16 @@
 
 import SwiftUI
 
-struct Booking: Identifiable {
-    let id = UUID()
-    let month: String
-    let day: String
-    let time: String
-    let barber: Barber
-    var fullTime: String { "\(month) \(day), \(time)" }
-    var shopName: String { barber.name }
-    let price: String
-    let status: String
-    let paymentMethod: String
-    let phoneNumber: String
-}
-
 struct BookingsView: View {
+    @StateObject private var viewModel = BookingsViewModel()
     @EnvironmentObject var bookingsManager: BookingsManager
-    @State private var selectedTab = "Active"
-    @State private var selectedBooking: Booking?
-    
-    let tabs = ["Active", "Inactive"]
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Picker("Status", selection: $selectedTab) {
-                    ForEach(tabs, id: \.self) {
-                        Text($0)
+                Picker("Status", selection: $viewModel.selectedTab) {
+                    ForEach(BookingsViewModel.BookingTab.allCases) { tab in
+                        Text(tab.rawValue).tag(tab)
                     }
                 }
                 .pickerStyle(.segmented)
@@ -42,7 +25,8 @@ struct BookingsView: View {
                 
                 ScrollView {
                     VStack(spacing: 12) {
-                        if selectedTab == "Active" {
+                        switch viewModel.selectedTab {
+                        case .active:
                             if bookingsManager.activeBookings.isEmpty {
                                ContentUnavailableView(
                                    "No bookings yet",
@@ -53,11 +37,11 @@ struct BookingsView: View {
                             } else {
                                 ForEach(bookingsManager.activeBookings) { booking in
                                     BookingCardView(booking: booking) {
-                                        selectedBooking = booking
+                                        viewModel.selectedBooking = booking
                                     }
                                 }
                             }
-                        } else {
+                        case .inactive:
                             ContentUnavailableView(
                                 "No inactive bookings",
                                 systemImage: "calendar.badge.clock",
@@ -72,9 +56,9 @@ struct BookingsView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("My bookings")
-            .sheet(item: $selectedBooking) { booking in
+            .sheet(item: $viewModel.selectedBooking) { booking in
                 BookingDetailSheet(booking: booking) {
-                    bookingsManager.cancelBooking(booking)
+                    viewModel.cancelBooking(booking, in: bookingsManager)
                 }
                 .presentationDetents([.fraction(0.65), .large])
                 .presentationDragIndicator(.visible)
@@ -258,7 +242,7 @@ struct DetailRowView: View {
 
 
 #Preview {
-    MainTabView()
+    BookingsView()
         .environmentObject(BookingsManager())
         .environmentObject(SavedBarbersManager())
 }
