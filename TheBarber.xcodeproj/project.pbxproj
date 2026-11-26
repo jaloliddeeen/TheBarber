@@ -33,6 +33,7 @@
 		48A0ED4E30B6A50D00E10D28 /* ProfileMenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED4D30B6A50D00E10D28 /* ProfileMenuRow.swift */; };
 		48A0ED5230B7409200E10D28 /* BarberApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5130B7409200E10D28 /* BarberApplication.swift */; };
 		48A0ED5430B740C300E10D28 /* BarberApplicationVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */; };
+		48A0ED5630B8913100E10D28 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5530B8913100E10D28 /* AppInfo.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
 		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
@@ -76,6 +77,7 @@
 		48A0ED4D30B6A50D00E10D28 /* ProfileMenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuRow.swift; sourceTree = "<group>"; };
 		48A0ED5130B7409200E10D28 /* BarberApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplication.swift; sourceTree = "<group>"; };
 		48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplicationVModel.swift; sourceTree = "<group>"; };
+		48A0ED5530B8913100E10D28 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				48A0ED5130B7409200E10D28 /* BarberApplication.swift */,
 				48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */,
 				485B367E3093844B00DA5E4D /* AboutProjectView.swift */,
+				48A0ED5530B8913100E10D28 /* AppInfo.swift */,
 				485B367C309162C100DA5E4D /* SavedBarbersView.swift */,
 				485B367A3091614800DA5E4D /* SavedBarbersManager.swift */,
 			);
@@ -277,6 +280,7 @@
 				48FEDF9F302D1D9A0017569D /* BarberDetailView.swift in Sources */,
 				48A0ED5230B7409200E10D28 /* BarberApplication.swift in Sources */,
 				48D5F62A3031ADA10018502A /* MapView.swift in Sources */,
+				48A0ED5630B8913100E10D28 /* AppInfo.swift in Sources */,
 				48D5F62C3031B9880018502A /* ProfileView.swift in Sources */,
 				48A0ED3830B599BF00E10D28 /* MapViewModel.swift in Sources */,
 				48FEDF89302BC21A0017569D /* RegisterView.swift in Sources */,

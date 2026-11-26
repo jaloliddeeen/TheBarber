@@ -28,42 +28,47 @@ struct EditProfileView: View {
                     HStack {
                         Spacer()
                         VStack(spacing: 8) {
-                            PhotosPicker(selection: $viewModel.selectedPhotoItem, matching: .images) {
-                                VStack(spacing: 8) {
-                                    ZStack(alignment: .bottomTrailing) {
-                                        if let avatarImage = viewModel.avatarImage {
-                                            Image(uiImage: avatarImage)
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 88, height: 88)
-                                                .clipShape(Circle())
-                                        } else {
-                                            ZStack {
-                                                Circle()
-                                                    .fill(Color(.systemGray5))
-                                                    .frame(width: 88, height: 88)
-                                                
-                                                Image(systemName: "person.fill")
-                                                    .font(.system(size: 38))
-                                                    .foregroundColor(.secondary)
-                                            }
-                                        }
+                            ZStack(alignment: .bottomTrailing) {
+                                if let avatarImage = viewModel.avatarImage {
+                                    Image(uiImage: avatarImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 88, height: 88)
+                                        .clipShape(Circle())
+                                } else {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color(.systemGray5))
+                                            .frame(width: 88, height: 88)
                                         
-                                        ZStack {
-                                            Circle()
-                                                .fill(Color.blue)
-                                                .frame(width: 28, height: 28)
-                                            
-                                            Image(systemName: "camera.fill")
-                                                .font(.caption2.bold())
-                                                .foregroundColor(.white)
-                                        }
+                                        Image(systemName: "person.fill")
+                                            .font(.system(size: 38))
+                                            .foregroundColor(.secondary)
                                     }
-                                    
-                                    Text("Edit Photo")
-                                        .font(.subheadline)
-                                        .foregroundColor(.blue)
                                 }
+                                
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.blue)
+                                        .frame(width: 28, height: 28)
+                                    
+                                    Image(systemName: "camera.fill")
+                                        .font(.caption2.bold())
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .overlay {
+                                PhotosPicker(selection: $viewModel.selectedPhotoItem, matching: .images) {
+                                    Color.clear
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .contentShape(Circle())
+                                }
+                            }
+                            
+                            PhotosPicker(selection: $viewModel.selectedPhotoItem, matching: .images) {
+                                Text("Edit Photo")
+                                    .font(.subheadline)
+                                    .foregroundColor(.blue)
                             }
                             .buttonStyle(.plain)
                             
