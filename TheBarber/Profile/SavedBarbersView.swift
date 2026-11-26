@@ -10,7 +10,6 @@ import SwiftUI
 struct SavedBarbersView: View {
     @EnvironmentObject var savedManager: SavedBarbersManager
     
-    // Identical grid configuration as HomeView
     let gridColumns = [
         GridItem(.flexible(), spacing: 14),
         GridItem(.flexible(), spacing: 14)
@@ -19,7 +18,6 @@ struct SavedBarbersView: View {
     var body: some View {
         Group {
             if savedManager.savedBarbers.isEmpty {
-                // Native iOS 17 Empty State
                 ContentUnavailableView(
                     "No Saved Barbers",
                     systemImage: "bookmark.slash",

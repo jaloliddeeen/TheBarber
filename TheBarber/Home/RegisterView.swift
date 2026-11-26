@@ -14,35 +14,17 @@ struct RegisterView: View {
     @FocusState private var focusedField: Field?
     
     enum Field {
-        case name
-        case phone
+        case name, phone
     }
     
     
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {
             
-            VStack(alignment: .leading, spacing: 8) {
-                Image(systemName: "scissors.badge.ellipsis")
-                    .font(.system(size: 40, weight: .bold))
-                    .foregroundColor(.blue)
-                    .padding(.bottom, 8)
-                
-                Text("Create Account")
-                    .font(.largeTitle)
-                    .bold()
-                
-                Text("Enter your details to get started with booking appointments.")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.top, 16)
+            RegisterHeaderView()
             
             VStack(spacing: 16) {
-                HStack(spacing: 12) {
-                    Image(systemName: "person.fill")
-                        .foregroundColor(.secondary)
-                    
+                CustomInputField(icon: "person.fill") {
                     TextField("First Name", text: $viewModel.name)
                         .textContentType(.givenName)
                         .focused($focusedField, equals: .name)
@@ -51,58 +33,33 @@ struct RegisterView: View {
                             focusedField = .phone
                         }
                 }
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 
-                HStack(spacing: 12) {
-                    Image(systemName: "phone.fill")
-                        .foregroundColor(.secondary)
-                    
+                CustomInputField(icon: "phone.fill") {
                     TextField("Phone Number", text: $viewModel.phoneNumber)
                         .keyboardType(.phonePad)
                         .textContentType(.telephoneNumber)
                         .focused($focusedField, equals: .phone)
                 }
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             }
             
             Spacer()
             
             VStack(spacing: 8) {
-                Button(action: {
+                PrimaryButton(
+                    title: "Continue",
+                    isEnabled: viewModel.isFormValid
+                ) {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
                         viewModel.completeRegistration()
                     }
                     dismiss()
-                }) {
-                    Text("Continue")
-                        .font(.headline)
-                        .bold()
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(viewModel.isFormValid ? Color.blue : Color.blue.opacity(0.4))
-                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
-                .disabled(!viewModel.isFormValid)
                 
-                Button(action: {
+                SecondaryButton(title: "Skip") {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
                         viewModel.skipRegistration()
                     }
                     dismiss()
-                }) {
-                    Text("Skip")
-                        .font(.headline)
-                        .bold()
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(Color(.systemGray6))
-                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
             }
             .padding(.bottom, 8)
@@ -117,6 +74,45 @@ struct RegisterView: View {
         )
     }
 }
+
+private struct RegisterHeaderView: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Image(systemName: "scissors.badge.ellipsis")
+                .font(.system(size: 40, weight: .bold))
+                .foregroundColor(.blue)
+                .padding(.bottom, 8)
+            
+            Text("Create Account")
+                .font(.largeTitle)
+                .bold()
+            
+            Text("Enter your details to get started with booking appointments.")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        }
+        .padding(.top, 16)
+    }
+}
+
+
+struct CustomInputField<Content: View>: View {
+    let icon: String
+    @ViewBuilder let content: () -> Content
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .foregroundColor(.secondary)
+            
+            content()
+        }
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+    }
+}
+
 
 #Preview {
     RegisterView()
