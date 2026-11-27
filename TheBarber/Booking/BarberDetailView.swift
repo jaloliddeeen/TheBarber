@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BarberDetailView: View {
     @StateObject private var viewModel: BarberDetailViewModel
-    
     @EnvironmentObject var savedManager: SavedBarbersManager
     
     @Binding var selectedTab: Int
@@ -24,140 +23,27 @@ struct BarberDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                HStack(spacing: 16) {
-                    Image(viewModel.barber.imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 70, height: 70)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                    
-                    VStack(alignment:.leading, spacing: 4) {
-                        Text(viewModel.barber.name)
-                            .font(.title2)
-                            .bold()
-                        
-                        HStack(spacing: 4) {
-                            Image(systemName: "phone.fill")
-                                .font(.body)
-                                .foregroundColor(.secondary)
-                            Text("+48 756-321-983")
-                                .font(.body)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    Spacer()
-                }
-                .background(Color.clear)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
                 
-                VStack(alignment: .leading, spacing: 12) {
-                    Label {
-                        VStack(alignment: .leading) {
-                            Text("Address")
-                                .font(.body)
-                                .foregroundStyle(.secondary)
-                            Text(viewModel.barber.location)
-                                .font(.body)
-                                .bold()
-                        }
-                    } icon: {
-                        Image(systemName: "mappin.circle.fill")
-                            .foregroundStyle(.blue)
-                    }
-                    
-                    Divider()
-                    
-                    Label {
-                        VStack(alignment: .leading) {
-                            Text("Price range")
-                                .font(.body)
-                                .foregroundStyle(.secondary)
-
-                            Text("$\(viewModel.barber.price) - $\(viewModel.barber.price + 50)")
-                                .font(.body)
-                                .bold()
-                        }
-                    } icon: {
-                        Image(systemName: "dollarsign.circle.fill")
-                            .foregroundColor(.blue)
-                    }
-                    Divider()
-                }
-                .background(Color.clear)
+                BarberDetailHeaderView(barber: viewModel.barber)
                 
+                BarberInfoSection(location: viewModel.barber.location, price: viewModel.barber.price)
                 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Work examples")
-                        .font(.title2)
-                        .bold()
-
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(viewModel.portfolioImages, id: \.self) { img in
-                                Image(img)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 140, height: 100)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                            }
-                        }
-                        .padding(.horizontal, 16)
-                    }
-                    .padding(.horizontal, -16)
-                }
+                PortfolioCarouselView(images: viewModel.portfolioImages)
                 
                 Divider()
                 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Select date")
-                        .font(.title2)
-                        .bold()
-                    
-                    DatePicker("Select date", selection: $viewModel.selectedDate, displayedComponents: [.date])
-                        .datePickerStyle(.graphical)
-                        .background(Color(.secondarySystemGroupedBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                }
+                DatePickerSection(selectedDate: $viewModel.selectedDate)
                 
                 Divider()
                 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Select time")
-                        .font(.title2)
-                        .bold()
-                        .padding(.vertical)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(viewModel.timeSlots, id: \.self) { time in
-                                Button(action: {
-                                    viewModel.selectTime(time)
-                                }) {
-                                    Text(time)
-                                        .font(.subheadline)
-                                        .bold()
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 10)
-                                        .background(viewModel.selectedTime == time ? Color.blue : Color(.tertiarySystemGroupedBackground))
-                                        .foregroundColor(viewModel.selectedTime == time ? .white : .primary)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                }
-                            }
-                        }
-                    }
-                }
-                Button(action: {
+                TimeSlotPickerView(
+                    timeSlots: viewModel.timeSlots,
+                    selectedTime: viewModel.selectedTime,
+                    onSelectTime: viewModel.selectTime
+                )
+                
+                PrimaryButton(title: "Book meeting") {
                     navPath.append(viewModel.makeReviewRoute())
-                }) {
-                    Text("Book appointment")
-                        .font(.headline)
-                        .bold()
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(Color.blue)
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
                 .padding(.top, 8)
             }
@@ -190,6 +76,168 @@ struct BarberDetailView: View {
         }
     }
 }
+
+
+struct BarberDetailHeaderView: View {
+    let barber: Barber
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            Image(barber.imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 70, height: 70)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(barber.name)
+                    .font(.title2)
+                    .bold()
+                
+                HStack(spacing: 4) {
+                    Image(systemName: "phone.fill")
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                    Text("+48 756-321-983")
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                }
+            }
+            Spacer()
+        }
+    }
+}
+
+
+struct BarberInfoSection: View {
+    let location: String
+    let price: Int
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            DetailInfoRow(
+                title: "Address",
+                subtitle: location,
+                iconName: "mappin.circle.fill"
+            )
+            
+            Divider()
+            
+            DetailInfoRow(
+                title: "Price range",
+                subtitle: "$\(price) - $\(price + 50)",
+                iconName: "dollarsign.circle.fill"
+            )
+            
+            Divider()
+        }
+    }
+}
+
+
+struct DetailInfoRow: View {
+    let title: String
+    let subtitle: String
+    let iconName: String
+    
+    var body: some View {
+        Label {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                Text(subtitle)
+                    .font(.body)
+                    .bold()
+            }
+        } icon: {
+            Image(systemName: iconName)
+                .foregroundStyle(.blue)
+        }
+    }
+}
+
+
+struct PortfolioCarouselView: View {
+    let images: [String]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Work examples")
+                .font(.title2)
+                .bold()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(images, id: \.self) { img in
+                        Image(img)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 140, height: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                }
+                .padding(.horizontal, 16)
+            }
+            .padding(.horizontal, -16)
+        }
+    }
+}
+
+
+struct DatePickerSection: View {
+    @Binding var selectedDate: Date
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Select date")
+                .font(.title2)
+                .bold()
+            
+            DatePicker("Select date", selection: $selectedDate, displayedComponents: [.date])
+                .datePickerStyle(.graphical)
+                .background(Color(.secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+        }
+    }
+}
+
+
+struct TimeSlotPickerView: View {
+    let timeSlots: [String]
+    let selectedTime: String
+    let onSelectTime: (String) -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Select time")
+                .font(.title2)
+                .bold()
+                .padding(.vertical, 4)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(timeSlots, id: \.self) { time in
+                        Button(action: {
+                            onSelectTime(time)
+                        }) {
+                            Text(time)
+                                .font(.subheadline)
+                                .bold()
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 10)
+                                .background(selectedTime == time ? Color.blue : Color(.tertiarySystemGroupedBackground))
+                                .foregroundColor(selectedTime == time ? .white : .primary)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     BarberDetailView(

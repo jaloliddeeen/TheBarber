@@ -132,13 +132,12 @@
 		485B368330939F8400DA5E4D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				48A0ED5E30B9D22A00E10D28 /* Components */,
 				48A0ED5730B8955700E10D28 /* ViewModels */,
 				48FEDF86302BC21A0017569D /* TheBarberApp.swift */,
 				48FEDF88302BC21A0017569D /* RegisterView.swift */,
-				48A0ED5A30B898CD00E10D28 /* PrimaryButton.swift */,
 				48FEDF94302BCBE30017569D /* MainTabView.swift */,
 				48FEDF96302BDDD40017569D /* HomeView.swift */,
-				48A0ED5C30B9B27000E10D28 /* EmptyStateView.swift */,
 				4863B6F53082764400CC2ECB /* NotificationsView.swift */,
 				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
 				48FEDF9C302CE0660017569D /* FilterView.swift */,
@@ -194,6 +193,15 @@
 				48A0ED3730B599BF00E10D28 /* MapViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		48A0ED5E30B9D22A00E10D28 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				48A0ED5A30B898CD00E10D28 /* PrimaryButton.swift */,
+				48A0ED5C30B9B27000E10D28 /* EmptyStateView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		48FEDF7A302BC21A0017569D = {
