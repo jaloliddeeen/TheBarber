@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SavedBarbersView: View {
     @EnvironmentObject var savedManager: SavedBarbersManager
+    @Environment(\.dismiss) private var dismiss
     
     let gridColumns = [
         GridItem(.flexible(), spacing: 14),
@@ -18,34 +19,30 @@ struct SavedBarbersView: View {
     var body: some View {
         Group {
             if savedManager.savedBarbers.isEmpty {
-                ContentUnavailableView(
-                    "No Saved Barbers",
-                    systemImage: "bookmark.slash",
-                    description: Text("Barbers you bookmark will appear here for quick booking.")
-                )
+                EmptyStateView.noSavedBarbers {
+                    dismiss()
+                }
             } else {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        LazyVGrid(columns: gridColumns, spacing: 14) {
-                            ForEach(savedManager.savedBarbers) { barber in
-                                NavigationLink(destination: BarberDetailView(
-                                    barber: barber,
-                                    selectedTab: .constant(3),
-                                    navPath: .constant(NavigationPath())
-                                )) {
-                                    BarberCardView(barber: barber)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                        }
-                        .padding(.horizontal)
-                    }
-                    .padding(.vertical)
+                ScrollView{
+                    BarberGridView(barbers: savedManager.savedBarbers)
+                        .padding(.vertical)
                 }
             }
         }
         .navigationTitle("Saved Barbers")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(for: AppRoute.self) { route in
+            switch route {
+            case .detail(let barber):
+                BarberDetailView(
+                    barber: barber,
+                    selectedTab: .constant(3),
+                    navPath: .constant(NavigationPath())
+                )
+            default:
+                EmptyView()
+            }
+        }
     }
 }
 

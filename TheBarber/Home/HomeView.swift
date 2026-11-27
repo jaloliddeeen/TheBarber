@@ -37,29 +37,13 @@ struct HomeView: View {
                     .padding(.horizontal)
                 
                 if viewModel.filteredBarbers.isEmpty {
-                    ContentUnavailableView {
-                        Label("No Barbers Found", systemImage: "line.3.horizontal.decrease.circle")
-                    } description: {
-                        Text("Try adjusting your price or rating filters.")
-                    } actions: {
-                        Button("Reset Filters") {
-                            withAnimation {
-                                viewModel.filterOptions.reset()
-                            }
+                    EmptyStateView.noFilterResults {
+                        withAnimation {
+                            viewModel.filterOptions.reset()
                         }
-                        .buttonStyle(.borderedProminent)
                     }
-                    .padding(.top, 40)
                 } else {
-                    LazyVGrid(columns: gridColumns, spacing: 14) {
-                        ForEach(viewModel.filteredBarbers) { barber in
-                            NavigationLink(value: AppRoute.detail(barber)) {
-                                BarberCardView(barber: barber)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    .padding(.horizontal)
+                    BarberGridView(barbers: viewModel.filteredBarbers)
                 }
             }
             .padding(.vertical)
@@ -101,6 +85,41 @@ struct HomeView: View {
         }
     }
 }
+
+struct BarberGridView: View {
+    let barbers: [Barber]
+    
+    private let gridColumns = [
+        GridItem(.flexible(), spacing: 14),
+        GridItem(.flexible(), spacing: 14)
+    ]
+    
+    var body: some View {
+        LazyVGrid(columns: gridColumns, spacing: 14) {
+            ForEach(barbers) { barber in
+                NavigationLink(value: AppRoute.detail(barber)) {
+                    BarberCardView(barber: barber)
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+
+struct FilterToolbarButton: View {
+    let isFiltered: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: isFiltered ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+                .font(.title3)
+        }
+    }
+}
+
 
 #Preview {
     NavigationStack {

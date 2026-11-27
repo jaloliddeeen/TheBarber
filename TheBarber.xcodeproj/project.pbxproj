@@ -35,6 +35,7 @@
 		48A0ED5430B740C300E10D28 /* BarberApplicationVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */; };
 		48A0ED5630B8913100E10D28 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5530B8913100E10D28 /* AppInfo.swift */; };
 		48A0ED5B30B898CD00E10D28 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5A30B898CD00E10D28 /* PrimaryButton.swift */; };
+		48A0ED5D30B9B27000E10D28 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED5C30B9B27000E10D28 /* EmptyStateView.swift */; };
 		48D5F62630311CF00018502A /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62530311CF00018502A /* BookingsView.swift */; };
 		48D5F62A3031ADA10018502A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F6293031ADA10018502A /* MapView.swift */; };
 		48D5F62C3031B9880018502A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5F62B3031B9880018502A /* ProfileView.swift */; };
@@ -80,6 +81,7 @@
 		48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarberApplicationVModel.swift; sourceTree = "<group>"; };
 		48A0ED5530B8913100E10D28 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		48A0ED5A30B898CD00E10D28 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		48A0ED5C30B9B27000E10D28 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		48D5F62530311CF00018502A /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
 		48D5F6293031ADA10018502A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		48D5F62B3031B9880018502A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				48A0ED5A30B898CD00E10D28 /* PrimaryButton.swift */,
 				48FEDF94302BCBE30017569D /* MainTabView.swift */,
 				48FEDF96302BDDD40017569D /* HomeView.swift */,
+				48A0ED5C30B9B27000E10D28 /* EmptyStateView.swift */,
 				4863B6F53082764400CC2ECB /* NotificationsView.swift */,
 				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
 				48FEDF9C302CE0660017569D /* FilterView.swift */,
@@ -314,6 +317,7 @@
 				48FEDF97302BDDD40017569D /* HomeView.swift in Sources */,
 				485B367B3091614800DA5E4D /* SavedBarbersManager.swift in Sources */,
 				48FEDF87302BC21A0017569D /* TheBarberApp.swift in Sources */,
+				48A0ED5D30B9B27000E10D28 /* EmptyStateView.swift in Sources */,
 				48A0ED4C30B6A4BC00E10D28 /* ProfileHeaderCard.swift in Sources */,
 				48A0ED3630B5948100E10D28 /* FilterViewModel.swift in Sources */,
 				485B3686309483FC00DA5E4D /* BarberApplicationView.swift in Sources */,

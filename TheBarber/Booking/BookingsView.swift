@@ -28,12 +28,7 @@ struct BookingsView: View {
                         switch viewModel.selectedTab {
                         case .active:
                             if bookingsManager.activeBookings.isEmpty {
-                               ContentUnavailableView(
-                                   "No bookings yet",
-                                   systemImage: "calendar.badge.plus",
-                                   description: Text("Appointments will appear here")
-                               )
-                               .padding(.top, 160)
+                                EmptyStateView.noActiveBookings
                             } else {
                                 ForEach(bookingsManager.activeBookings) { booking in
                                     BookingCardView(booking: booking) {
@@ -42,12 +37,7 @@ struct BookingsView: View {
                                 }
                             }
                         case .inactive:
-                            ContentUnavailableView(
-                                "No inactive bookings",
-                                systemImage: "calendar.badge.clock",
-                                description: Text("Past appointments will appear here")
-                            )
-                            .padding(.top, 160)
+                            EmptyStateView.noInactiveBookings
                         }
                     }
                     .padding(.horizontal)
