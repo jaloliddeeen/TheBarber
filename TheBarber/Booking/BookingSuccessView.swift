@@ -35,34 +35,16 @@ struct BookingSuccessView: View {
             Spacer()
 
             VStack(spacing: 12) {
-                Button(action: {
+                PrimaryButton(title: "View booking") {
                     selectedTab = 1
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         navPath = NavigationPath()
                     }
-                }) {
-                    Text("View Booking")
-                        .font(.headline)
-                        .bold()
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(Color.blue)
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
                 
-                Button(action: {
+                SecondaryButton(title: "Back to home") {
                     navPath = NavigationPath()
                     selectedTab = 0
-                }) {
-                    Text("Back to Home")
-                        .font(.headline)
-                        .bold()
-                        .foregroundColor(.blue)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(Color.blue.opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
             }
             .padding(.horizontal, 20)

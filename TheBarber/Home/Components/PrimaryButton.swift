@@ -53,6 +53,27 @@ struct SecondaryButton: View {
     }
 }
 
+struct CancelButton: View {
+    let title: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.headline)
+                .bold()
+                .foregroundColor(.red)
+                .frame(maxWidth: .infinity)
+                .frame(height: 52)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(.red, lineWidth: 1)
+                )
+        }
+    }
+}
+
 #Preview("App Buttons") {
     VStack(spacing: 16) {
         PrimaryButton(title: "Continue (Enabled)", isEnabled: true) {}
@@ -62,6 +83,8 @@ struct SecondaryButton: View {
         PrimaryButton(title: "Continue (Loading)", isEnabled: true, isLoading: true) {}
         
         SecondaryButton(title: "Skip") {}
+        
+        CancelButton(title: "Cancel") {}
     }
     .padding()
 }

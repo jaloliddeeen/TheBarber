@@ -158,18 +158,8 @@ struct BookingDetailSheet: View {
                 
                 Spacer()
                 
-                Button(action: {
+                CancelButton(title: "Cancel booking") {
                     showCancelAlert = true
-                }) {
-                    Text("Cancel booking")
-                        .font(.headline)
-                        .foregroundColor(.red)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .overlay (
-                            RoundedRectangle(cornerRadius: 14)
-                                .stroke(Color.red, lineWidth: 1)
-                        )
                 }
             }
             .padding()
@@ -186,13 +176,13 @@ struct BookingDetailSheet: View {
                 
             }
             .alert("Cancel booking?", isPresented: $showCancelAlert) {
-                Button("Cancel appointment", role: .destructive) {
+                Button("Cancel booking", role: .destructive) {
                     onCancel()
                     dismiss()
                 }
                 Button("Keep booking", role: .cancel) { }
             } message: {
-                Text("Are you sure you want to cancel your appointment with \(booking.shopName)?")
+                Text("Are you sure you want to cancel your booking with \(booking.shopName)?")
             }
         }
     }

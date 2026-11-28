@@ -52,24 +52,15 @@ struct BookingReviewView: View {
             }
             .listSectionSpacing(.compact)
             
-            
-            Button( action: {
+            PrimaryButton(title: "Confirm booking") {
                 viewModel.confirmBooking(
                     bookingsManager: bookingsManager,
                     notificationsViewModel: notificationsViewModel
                 ) {
                     navPath.append(AppRoute.success)
                 }
-            }) {
-                Text("Confirm booking")
-                    .font(.headline)
-                    .bold()
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 52)
-                    .background(Color.blue)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
             }
+            
             .padding(.horizontal, 20)
             .padding(.bottom, 16)
         }
