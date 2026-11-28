@@ -113,18 +113,13 @@
 		485B368230939F6700DA5E4D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				48A0ED5830B895C100E10D28 /* ViewModels */,
 				48D5F62B3031B9880018502A /* ProfileView.swift */,
 				48A0ED4B30B6A4BC00E10D28 /* ProfileHeaderCard.swift */,
 				48A0ED4D30B6A50D00E10D28 /* ProfileMenuRow.swift */,
 				48A0ED4730B6A23F00E10D28 /* EditProfileView.swift */,
-				48A0ED4330B6A13B00E10D28 /* UserProfile.swift */,
 				485B3685309483FC00DA5E4D /* BarberApplicationView.swift */,
-				48A0ED5130B7409200E10D28 /* BarberApplication.swift */,
 				485B367E3093844B00DA5E4D /* AboutProjectView.swift */,
-				48A0ED5530B8913100E10D28 /* AppInfo.swift */,
 				485B367C309162C100DA5E4D /* SavedBarbersView.swift */,
-				485B367A3091614800DA5E4D /* SavedBarbersManager.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -132,16 +127,12 @@
 		485B368330939F8400DA5E4D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				48A0ED5E30B9D22A00E10D28 /* Components */,
-				48A0ED5730B8955700E10D28 /* ViewModels */,
 				48FEDF86302BC21A0017569D /* TheBarberApp.swift */,
 				48FEDF88302BC21A0017569D /* RegisterView.swift */,
 				48FEDF94302BCBE30017569D /* MainTabView.swift */,
 				48FEDF96302BDDD40017569D /* HomeView.swift */,
 				4863B6F53082764400CC2ECB /* NotificationsView.swift */,
-				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
 				48FEDF9C302CE0660017569D /* FilterView.swift */,
-				48A0ED3330B593F800E10D28 /* FilterOptions.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -149,16 +140,12 @@
 		485B368430939FAA00DA5E4D /* Booking */ = {
 			isa = PBXGroup;
 			children = (
-				48A0ED5930B895F300E10D28 /* ViewModels */,
 				48FEDF9A302BDF0D0017569D /* BarberCardView.swift */,
 				48FEDF9E302D1D990017569D /* BarberDetailView.swift */,
 				48FEDFA0302DC1C10017569D /* BookingReviewView.swift */,
 				48FEDFA2302E68650017569D /* BookingSuccessView.swift */,
 				48D5F62530311CF00018502A /* BookingsView.swift */,
-				48A0ED3F30B699E500E10D28 /* Booking.swift */,
-				485B368030939F4E00DA5E4D /* BookingsManager.swift */,
 				48D5F6293031ADA10018502A /* MapView.swift */,
-				48A0ED3930B59A2000E10D28 /* MapBarberLocation.swift */,
 			);
 			path = Booking;
 			sourceTree = "<group>";
@@ -170,27 +157,13 @@
 				48A0ED2D30B4A5DA00E10D28 /* HomeViewModel.swift */,
 				48A0ED3130B4A9D800E10D28 /* NotificationsViewModel.swift */,
 				48A0ED3530B5948100E10D28 /* FilterViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		48A0ED5830B895C100E10D28 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				48A0ED4530B6A1CE00E10D28 /* ProfileViewModel.swift */,
-				48A0ED4930B6A2FB00E10D28 /* EditProfileViewModel.swift */,
-				48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		48A0ED5930B895F300E10D28 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
 				48A0ED3B30B59D7F00E10D28 /* BarberDetailViewModel.swift */,
 				48A0ED3D30B5FA7500E10D28 /* BookingReviewViewModel.swift */,
 				48A0ED4130B699F900E10D28 /* BookingsViewModel.swift */,
 				48A0ED3730B599BF00E10D28 /* MapViewModel.swift */,
+				48A0ED4530B6A1CE00E10D28 /* ProfileViewModel.swift */,
+				48A0ED4930B6A2FB00E10D28 /* EditProfileViewModel.swift */,
+				48A0ED5330B740C300E10D28 /* BarberApplicationVModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -202,6 +175,32 @@
 				48A0ED5C30B9B27000E10D28 /* EmptyStateView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		48A0ED5F30BB214900E10D28 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48A0ED2F30B4A9C000E10D28 /* LocalNotificationService.swift */,
+				48A0ED3330B593F800E10D28 /* FilterOptions.swift */,
+				48A0ED4330B6A13B00E10D28 /* UserProfile.swift */,
+				48A0ED5130B7409200E10D28 /* BarberApplication.swift */,
+				48A0ED3F30B699E500E10D28 /* Booking.swift */,
+				485B368030939F4E00DA5E4D /* BookingsManager.swift */,
+				48A0ED3930B59A2000E10D28 /* MapBarberLocation.swift */,
+				48A0ED5530B8913100E10D28 /* AppInfo.swift */,
+				485B367A3091614800DA5E4D /* SavedBarbersManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		48A0ED6030BB21EE00E10D28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				48A0ED5F30BB214900E10D28 /* Models */,
+				48A0ED5E30B9D22A00E10D28 /* Components */,
+				48A0ED5730B8955700E10D28 /* ViewModels */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		48FEDF7A302BC21A0017569D = {
@@ -223,6 +222,7 @@
 		48FEDF85302BC21A0017569D /* TheBarber */ = {
 			isa = PBXGroup;
 			children = (
+				48A0ED6030BB21EE00E10D28 /* Views */,
 				485B368330939F8400DA5E4D /* Home */,
 				485B368430939FAA00DA5E4D /* Booking */,
 				485B368230939F6700DA5E4D /* Profile */,
